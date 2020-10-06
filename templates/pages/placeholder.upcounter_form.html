@@ -1,0 +1,17 @@
+{% extends 'layouts/main.html' %}
+{% block title %}About{% endblock %}
+{% block content %}
+
+<div class="page-header">
+  <h1>Up Counter</h1>
+</div>
+<form action="{{ url_for('upcounter') }}" method = "POST">
+  <label for="fname">No. of bits:</label><br>
+  <input type="text" id="bits" name="bits" value=""><br>
+  <label for="lname">Starting Point:</label><br>
+  <input type="text" id="spoint" name="spoint" value=""><br>
+  <label for="lname">Ending Point:</label><br>
+  <input type="text" id="epoint" name="epoint" value=""><br><br>
+  <input type="submit" value="Submit">
+</form>
+{% endblock %}

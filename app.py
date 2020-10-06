@@ -51,6 +51,11 @@ def about():
     return render_template('pages/placeholder.about.html')
 
 
+@app.route('/modules')
+def modules():
+    return render_template('pages/placeholder.module.html')
+
+
 @app.route('/login')
 def login():
     form = LoginForm(request.form)
@@ -90,6 +95,23 @@ if not app.debug:
     file_handler.setLevel(logging.INFO)
     app.logger.addHandler(file_handler)
     app.logger.info('errors')
+
+
+#----------------------------------------------------------------------------#
+# Form
+#----------------------------------------------------------------------------#
+@app.route('/up-counter-form')
+def upcounter_form():
+    return render_template('pages/placeholder.upcounter_form.html')
+#----------------------------------------------------------------------------#
+# Modules
+#----------------------------------------------------------------------------#
+@app.route('/up-counter',methods=['POST','GET'])
+def upcounter():
+    
+    result = request.form
+    return render_template('pages/placeholder.upcounter.html',result=result)
+
 
 #----------------------------------------------------------------------------#
 # Launch.
