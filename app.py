@@ -8,6 +8,7 @@ import logging
 from logging import Formatter, FileHandler
 from forms import *
 import os
+import pandas
 
 #----------------------------------------------------------------------------#
 # App Config.
