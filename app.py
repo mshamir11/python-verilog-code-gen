@@ -17,6 +17,8 @@ app = Flask(__name__)
 app.config.from_object('config')
 #db = SQLAlchemy(app)
 
+#Hello!!! Finally got github working for me... Not the way we tried yesterday
+
 # Automatically tear down SQLAlchemy.
 '''
 @app.teardown_request
