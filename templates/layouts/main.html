@@ -17,6 +17,29 @@
 <link type="text/css" rel="stylesheet" href="/static/css/main.css" />
 <link type="text/css" rel="stylesheet" href="/static/css/main.responsive.css" />
 <link type="text/css" rel="stylesheet" href="/static/css/main.quickfix.css" />
+
+<style>
+  footer {
+      position: relative;
+      height: 50px;
+      width: 100%;
+      background-color: #333333;
+  }
+
+  p.copyright {
+      position: absolute;
+      width: 100%;
+      color: #fff;
+      line-height: 40px;
+      font-size: 0.7em;
+      text-align: center;
+      bottom:-10;
+  }
+</style>
+
+
+
+
 <!-- /styles -->
 
 <!-- favicons -->
@@ -95,14 +118,17 @@
     </main>
 
   </div>
-
-  <div id="footer">
+<br>
+<footer>
+  <p class="copyright">© ES 203: Digital Systems Project</p>
+</footer>
+  <!-- <div id="footer">
     <div class="container">
-      <p>Your Company &copy; All Rights Reserved.</p>
+      <p>ES 203: Digital Systems Project </p>
       {% block footer %}{% endblock %}
     </div>
-  </div>
-
+  </div> -->
+ 
   <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
   <script>window.jQuery || document.write('<script type="text/javascript" src="/static/js/libs/jquery-1.11.1.min.js"><\/script>')</script>
   <script type="text/javascript" src="/static/js/libs/bootstrap-3.1.1.min.js" defer></script>
