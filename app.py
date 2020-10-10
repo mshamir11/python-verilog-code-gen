@@ -103,6 +103,18 @@ if not app.debug:
 @app.route('/up-counter-form')
 def upcounter_form():
     return render_template('pages/placeholder.upcounter_form.html')
+
+@app.route('/johnson-counter-form')
+def johnson_counter_form():
+    return render_template('pages/placeholder.johnson_form.html')
+
+@app.route('/ring-counter-form')
+def ring_counter_form():
+    return render_template('pages/placeholder.ring_form.html')
+
+@app.route('/down-counter-form')
+def down_counter_form():
+    return render_template('pages/placeholder.down_form.html')
 #----------------------------------------------------------------------------#
 # Modules
 #----------------------------------------------------------------------------#
@@ -112,7 +124,20 @@ def upcounter():
     result = request.form
     return render_template('pages/placeholder.upcounter.html',result=result)
 
+@app.route('/johnson-counter',methods=['POST','GET'])
+def johnson_counter():   
+    result = request.form
+    return render_template('pages/placeholder.johnson.html',result=result)
 
+@app.route('/ring-counter',methods=['POST','GET'])
+def ring_counter():   
+    result = request.form
+    return render_template('pages/placeholder.ring.html',result=result)
+
+@app.route('/down-counter',methods=['POST','GET'])
+def down_counter():   
+    result = request.form
+    return render_template('pages/placeholder.down.html',result=result)
 #----------------------------------------------------------------------------#
 # Launch.
 #----------------------------------------------------------------------------#

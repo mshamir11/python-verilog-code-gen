@@ -1,0 +1,46 @@
+{% extends 'layouts/main.html' %}
+{% block title %}About{% endblock %}
+{% block content %}
+
+<div class="page-header">
+  <h1>Ring Counter</h1>
+</div>
+
+<p>module ringcounter(Q,clk,reset);</p>
+<p>&nbsp; parameter n={{result.bits}};</p>
+<p>&nbsp; input clk,reset;</p>
+<p>&nbsp; output reg [n-1:0] Q;</p>
+<p>&nbsp;&nbsp;</p>
+<p>&nbsp; always @(posedge clk)</p>
+<p>&nbsp; &nbsp; if (reset)</p>
+<p>&nbsp; &nbsp; &nbsp; Q &lt;= 1;</p>
+<p>&nbsp; &nbsp; else begin</p>
+<p>&nbsp; &nbsp; &nbsp; Q[n-1]&lt;=Q[0];</p>
+<p>&nbsp; &nbsp; &nbsp; for (int i=0; i&lt;n-1; i=i+1) begin</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; Q[i] &lt;= Q[i+1];</p>
+<p>&nbsp; &nbsp; &nbsp; end</p>
+<p>&nbsp; &nbsp; end</p>
+<p>endmodule</p>
+
+
+<!-- <p>&nbsp; wire b;</p>
+<p>&nbsp; assign b = a&amp;Q[1];</p>
+<p>&nbsp; JKff a3 (reset,clk,b,b,Q[2],Qbar[2]);</p>
+<p>&nbsp;&nbsp;</p>
+<p>&nbsp; wire c;</p>
+<p>&nbsp; assign c = b&amp;Q[2];</p>
+<p>&nbsp; JKff a4 (reset,clk,c,c,Q[3],Qbar[3]);</p>
+<p>&nbsp;&nbsp;</p>
+<p>&nbsp; wire d;</p>
+<p>&nbsp; assign d = c&amp;Q[3];</p>
+<p>&nbsp; JKff a5 (reset,clk,d,d,Q[4],Qbar[4]);</p>
+<p>&nbsp;&nbsp;</p> -->
+
+
+
+
+
+
+
+
+{% endblock %}

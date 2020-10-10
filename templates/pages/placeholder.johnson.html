@@ -1,0 +1,65 @@
+{% extends 'layouts/main.html' %}
+{% block title %}About{% endblock %}
+{% block content %}
+
+<div class="page-header">
+  <h1>Johnson Counter</h1>
+</div>
+
+<p>module Dff(reset,clk,D,q,qnot);</p>
+<p>&nbsp; input reset,clk,D;</p>
+<p>&nbsp; output reg q;</p>
+<p>&nbsp; output qnot;</p>
+<p>&nbsp;&nbsp;</p>
+<p>&nbsp; assign qnot = ~q;</p>
+<p>&nbsp;&nbsp;</p>
+<p>&nbsp; always @(posedge clk)</p>
+<p>&nbsp; &nbsp; if (reset)</p>
+<p>&nbsp; &nbsp; &nbsp; q &lt;= 0;</p>
+<p>&nbsp; &nbsp; else</p>
+<p>&nbsp; &nbsp; &nbsp; if (D==0)</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; q&lt;=0;</p>
+<p>&nbsp; <span style="white-space:pre;">&nbsp; &nbsp;&nbsp;</span>&nbsp; else if (D==1)</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; q&lt;=1;</p>
+<p>&nbsp;&nbsp;</p>
+<p>endmodule</p>
+<p><br></p>
+<p>module johnsoncounter(Q,Qbar,clk,reset);</p>
+<p>&nbsp;&nbsp;</p>
+<p>&nbsp; input clk,reset;</p>
+<p>&nbsp; output [{{(result.bits | int)-1}}:0] Q,Qbar;</p>
+<p>&nbsp;&nbsp;</p>
+
+{% for i in range((result.bits | int)-1)%}
+<p>&nbsp; Dff a{{i+1}} (reset,clk,Q[{{i+1}}],Q[{{i}}],Qbar[{{i}}]);</p>
+
+
+{% endfor %}
+
+<p>&nbsp; Dff a{{(result.bits | int)}} (reset,clk,Qbar[0],Q[{{(result.bits | int)-1}}],Qbar[{{(result.bits | int)-1}}]);</p>
+
+<p>endmodule</p>
+
+
+
+<!-- <p>&nbsp; wire b;</p>
+<p>&nbsp; assign b = a&amp;Q[1];</p>
+<p>&nbsp; JKff a3 (reset,clk,b,b,Q[2],Qbar[2]);</p>
+<p>&nbsp;&nbsp;</p>
+<p>&nbsp; wire c;</p>
+<p>&nbsp; assign c = b&amp;Q[2];</p>
+<p>&nbsp; JKff a4 (reset,clk,c,c,Q[3],Qbar[3]);</p>
+<p>&nbsp;&nbsp;</p>
+<p>&nbsp; wire d;</p>
+<p>&nbsp; assign d = c&amp;Q[3];</p>
+<p>&nbsp; JKff a5 (reset,clk,d,d,Q[4],Qbar[4]);</p>
+<p>&nbsp;&nbsp;</p> -->
+
+
+
+
+
+
+
+
+{% endblock %}
