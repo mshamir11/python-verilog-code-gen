@@ -10,8 +10,8 @@
 <p>module counter(clk,reset,select,counter); &nbsp;</p>
 <p>&nbsp;&nbsp;</p>
 <p>&nbsp; parameter n = {{result.bits}};</p>
-<p>&nbsp; parameter start_point= 0;</p>
-<p>&nbsp; parameter end_point= {{2**(result.bits | int)-1}};</p>
+<p>&nbsp; parameter start_point= {{2**(result.bits | int)-1}};</p>
+<p>&nbsp; parameter end_point=0 ;</p>
 <p>&nbsp; input clk;</p>
 <p>&nbsp; input reset;</p>
 <p>&nbsp; input[1:0] select;</p>
@@ -28,7 +28,7 @@
 <p>&nbsp; &nbsp; &nbsp; &nbsp; if (counter==end_point)</p>
 <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span style="white-space:pre;">&nbsp; &nbsp; &nbsp; &nbsp;&nbsp;</span>counter&lt;=start_point;</p>
 <p>&nbsp; &nbsp; &nbsp; &nbsp; <span style="white-space:pre;">&nbsp; &nbsp; &nbsp; &nbsp;&nbsp;</span>else</p>
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span style="white-space:pre;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;</span>counter =counter + 1;</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span style="white-space:pre;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;</span>counter =counter - 1;</p>
 <p>&nbsp; &nbsp; &nbsp; &nbsp;&nbsp;</p>
 <p>&nbsp; &nbsp; &nbsp; end</p>
 <p>&nbsp; &nbsp; end</p>
@@ -68,18 +68,18 @@
 
 {% for i in range((result.bits | int )) %}
 {% if i==0 %}
-<p>&nbsp; JKff a{{i+1}} (reset,clk,1,1,Q[0],Qbar[0]);</p>
+<p>&nbsp; JKff a{{i+1}} (reset,clk,1,1,Qbar[0],Q[0]);</p>
 <p>&nbsp;&nbsp;</p>
 
 {% elif i==1 %}
 <p>&nbsp; wire w{{i}};</p>
-<p>&nbsp; assign w{{i}} = Q[{{i-1}}];</p>
-<p>&nbsp; JKff a{{i+1}} (reset,clk,w{{i}},w{{i}},Q[{{i}}],Qbar[{{i}}]);</p>
+<p>&nbsp; assign w{{i}} = Qbar[{{i-1}}];</p>
+<p>&nbsp; JKff a{{i+1}} (reset,clk,w{{i}},w{{i}},Qbar[{{i}}],Q[{{i}}]);</p>
 <p>&nbsp;&nbsp;</p>
 {% else %}
 <p>&nbsp; wire w{{i}};</p>
-<p>&nbsp; assign w{{i}} = w{{i-1}}&amp;Q[{{i-1}}];</p>
-<p>&nbsp; JKff a{{i+1}} (reset,clk,w{{i}},w{{i}},Q[{{i}}],Qbar[{{i}}]);</p>
+<p>&nbsp; assign w{{i}} = w{{i-1}}&amp;Qbar[{{i-1}}];</p>
+<p>&nbsp; JKff a{{i+1}} (reset,clk,w{{i}},w{{i}},Qbar[{{i}}],Q[{{i}}]);</p>
 <p>&nbsp;&nbsp;</p>
 
 {% endif %}
