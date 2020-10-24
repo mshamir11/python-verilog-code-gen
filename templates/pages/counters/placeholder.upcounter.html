@@ -1,0 +1,115 @@
+{% extends 'layouts/main.html' %}
+{% block title %}About{% endblock %}
+{% block content %}
+
+<div class="page-header">
+  <h1>Up Counter</h1>
+</div>
+
+{% if result.implementation=='behavioral' %}
+<p>module counter(clk,reset,select,counter); &nbsp;</p>
+<p>&nbsp;&nbsp;</p>
+<p>&nbsp; parameter n = {{result.bits}};</p>
+<p>&nbsp; parameter start_point= 0;</p>
+<p>&nbsp; parameter end_point= {{2**(result.bits | int)-1}};</p>
+<p>&nbsp; input clk;</p>
+<p>&nbsp; input reset;</p>
+<p>&nbsp; input[1:0] select;</p>
+<p>&nbsp;&nbsp;</p>
+<p>&nbsp; output reg[{{(result.bits | int)-1}}:0] counter;</p>
+<p>&nbsp;&nbsp;</p>
+<p>&nbsp;&nbsp;</p>
+<p>&nbsp;&nbsp;</p>
+<p>&nbsp; always @(posedge clk,reset)</p>
+<p>&nbsp; &nbsp; begin</p>
+<p>&nbsp; &nbsp; &nbsp; if (reset)</p>
+<p>&nbsp; &nbsp; <span style="white-space:pre;">&nbsp; &nbsp;&nbsp;</span>counter &lt;=start_point;&nbsp;</p>
+<p>&nbsp; &nbsp; &nbsp; else begin</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; if (counter==end_point)</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span style="white-space:pre;">&nbsp; &nbsp; &nbsp; &nbsp;&nbsp;</span>counter&lt;=start_point;</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; <span style="white-space:pre;">&nbsp; &nbsp; &nbsp; &nbsp;&nbsp;</span>else</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span style="white-space:pre;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;</span>counter =counter + 1;</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp;&nbsp;</p>
+<p>&nbsp; &nbsp; &nbsp; end</p>
+<p>&nbsp; &nbsp; end</p>
+<p>endmodule</p>
+
+{% elif result.implementation=='structural' %}
+
+<p>module JKff(reset,clk,j,k,q,qnot);</p>
+<p>&nbsp; input reset,clk,j,k;</p>
+<p>&nbsp; output reg q;</p>
+<p>&nbsp; output qnot;</p>
+<p>&nbsp;&nbsp;</p>
+<p>&nbsp; assign qnot = ~q;</p>
+<p>&nbsp;&nbsp;</p>
+<p>&nbsp; always @(posedge clk)</p>
+<p>&nbsp; &nbsp; if (reset)</p>
+<p>&nbsp; &nbsp; &nbsp; q &lt;= 0;</p>
+<p>&nbsp; &nbsp; else</p>
+<p>&nbsp; &nbsp; &nbsp; if (j==0 &amp; k==0)</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; q&lt;=q;</p>
+<p>&nbsp; <span style="white-space:pre;">&nbsp; &nbsp;&nbsp;</span>&nbsp; else if (j==0 &amp; k==1)</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; q&lt;=0;</p>
+<p>&nbsp; &nbsp; &nbsp; else if (j==1 &amp; k==0)</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; q&lt;=1;</p>
+<p>&nbsp; &nbsp; &nbsp; else if (j==1 &amp; k==1)</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; q&lt;=~q;</p>
+<p>&nbsp;&nbsp;</p>
+<p>endmodule</p>
+<p><br></p>
+<p>module synJKcounter(Q,Qbar,clk,reset);</p>
+<p>&nbsp;&nbsp;</p>
+<p>&nbsp; parameter ={{result.bits}};</p>
+<p>&nbsp; input clk,reset;</p>
+<p>&nbsp; output [n-1:0] Q,Qbar;</p>
+<p>&nbsp;&nbsp;</p>
+<p>&nbsp;&nbsp;</p>
+
+{% for i in range((result.bits | int )) %}
+{% if i==0 %}
+<p>&nbsp; JKff a{{i+1}} (reset,clk,1,1,Q[0],Qbar[0]);</p>
+<p>&nbsp;&nbsp;</p>
+
+{% elif i==1 %}
+<p>&nbsp; wire w{{i}};</p>
+<p>&nbsp; assign w{{i}} = Q[{{i-1}}];</p>
+<p>&nbsp; JKff a{{i+1}} (reset,clk,w{{i}},w{{i}},Q[{{i}}],Qbar[{{i}}]);</p>
+<p>&nbsp;&nbsp;</p>
+{% else %}
+<p>&nbsp; wire w{{i}};</p>
+<p>&nbsp; assign w{{i}} = w{{i-1}}&amp;Q[{{i-1}}];</p>
+<p>&nbsp; JKff a{{i+1}} (reset,clk,w{{i}},w{{i}},Q[{{i}}],Qbar[{{i}}]);</p>
+<p>&nbsp;&nbsp;</p>
+
+{% endif %}
+
+
+
+{% endfor %}
+
+
+
+<!-- <p>&nbsp; wire b;</p>
+<p>&nbsp; assign b = a&amp;Q[1];</p>
+<p>&nbsp; JKff a3 (reset,clk,b,b,Q[2],Qbar[2]);</p>
+<p>&nbsp;&nbsp;</p>
+<p>&nbsp; wire c;</p>
+<p>&nbsp; assign c = b&amp;Q[2];</p>
+<p>&nbsp; JKff a4 (reset,clk,c,c,Q[3],Qbar[3]);</p>
+<p>&nbsp;&nbsp;</p>
+<p>&nbsp; wire d;</p>
+<p>&nbsp; assign d = c&amp;Q[3];</p>
+<p>&nbsp; JKff a5 (reset,clk,d,d,Q[4],Qbar[4]);</p>
+<p>&nbsp;&nbsp;</p> -->
+
+
+
+
+<p>endmodule</p>
+
+{% endif %}
+
+
+
+{% endblock %}

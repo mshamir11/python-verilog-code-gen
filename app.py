@@ -98,46 +98,100 @@ if not app.debug:
 
 
 #----------------------------------------------------------------------------#
+
+#----------------------------------------------------------------------------#
+# Modules
+#----------------------------------------------------------------------------#
+
+# Counters
+#----------------------------------------------------------------------------#
+
+
 # Form
 #----------------------------------------------------------------------------#
 @app.route('/up-counter-form')
 def upcounter_form():
-    return render_template('pages/placeholder.upcounter_form.html')
+    return render_template('pages/counters/forms/placeholder.upcounter_form.html')
 
 @app.route('/johnson-counter-form')
 def johnson_counter_form():
-    return render_template('pages/placeholder.johnson_form.html')
+    return render_template('pages/counters/forms/placeholder.johnson_form.html')
 
 @app.route('/ring-counter-form')
 def ring_counter_form():
-    return render_template('pages/placeholder.ring_form.html')
+    return render_template('pages/counters/forms/placeholder.ring_form.html')
 
 @app.route('/down-counter-form')
 def down_counter_form():
-    return render_template('pages/placeholder.down_form.html')
-#----------------------------------------------------------------------------#
-# Modules
-#----------------------------------------------------------------------------#
+    return render_template('pages/counters/forms/placeholder.down_form.html')
+
+@app.route('/custom-counter-form')
+def custom_counter_form():
+    return render_template('pages/counters/forms/placeholder.custom_form.html')
+
+
+
 @app.route('/up-counter',methods=['POST','GET'])
 def upcounter():
-    
     result = request.form
     return render_template('pages/placeholder.upcounter.html',result=result)
 
 @app.route('/johnson-counter',methods=['POST','GET'])
 def johnson_counter():   
     result = request.form
-    return render_template('pages/placeholder.johnson.html',result=result)
+    return render_template('pages/counters/placeholder.johnson.html',result=result)
 
 @app.route('/ring-counter',methods=['POST','GET'])
 def ring_counter():   
     result = request.form
-    return render_template('pages/placeholder.ring.html',result=result)
+    return render_template('pages/counters/placeholder.ring.html',result=result)
 
 @app.route('/down-counter',methods=['POST','GET'])
 def down_counter():   
     result = request.form
-    return render_template('pages/placeholder.down.html',result=result)
+    return render_template('pages/counters/placeholder.down.html',result=result)
+
+@app.route('/custom-counter',methods=['POST','GET'])
+def custom_counter():   
+    result = request.form
+    return render_template('pages/counters/placeholder.custom.html',result=result)
+
+
+# Flip Flops
+#----------------------------------------------------------------------------#
+
+@app.route('/d-flipflop',methods=['POST','GET'])
+def d_flipflop():   
+    result = request.form
+    return render_template('pages/flipflops/placeholder.d_flipflop.html',result=result)
+
+@app.route('/jk-flipflop',methods=['POST','GET'])
+def jk_flipflop():   
+    result = request.form
+    return render_template('pages/flipflops/placeholder.jk_flipflop.html',result=result)
+
+@app.route('/sr-flipflop',methods=['POST','GET'])
+def sr_flipflop():   
+    result = request.form
+    return render_template('pages/flipflops/placeholder.sr_flipflop.html',result=result)
+
+@app.route('/t_flipflop',methods=['POST','GET'])
+def t_flipflop():   
+    result = request.form
+    return render_template('pages/flipflops/placeholder.t_flipflop.html',result=result)
+
+
+# Registers
+#----------------------------------------------------------------------------#
+
+@app.route('/siso-form')
+def siso_form():
+    return render_template('pages/registers/forms/placeholder.siso_form.html')
+
+@app.route('/siso',methods=['POST','GET'])
+def siso():   
+    result = request.form
+    return render_template('pages/registers/placeholder.siso.html',result=result)
 #----------------------------------------------------------------------------#
 # Launch.
 #----------------------------------------------------------------------------#
