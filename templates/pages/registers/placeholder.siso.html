@@ -1,0 +1,40 @@
+{% extends 'layouts/main.html' %}
+{% block title %}About{% endblock %}
+{% block content %}
+
+<div class="page-header">
+  <h1>SISO</h1>
+</div>
+
+
+
+<p>module SISO_register(output_seq,input_seq,clk,reset);</p>
+<p>&nbsp; parameter n={{result.bits}};</p>
+<p>&nbsp; input [n-1:0] input_seq;</p>
+<p>&nbsp; input clk,reset;</p>
+<p>&nbsp; output reg [n-1:0] output_seq;</p>
+<p>&nbsp; integer i,j=0;</p>
+<p>&nbsp; wire input_temp;</p>
+<p>&nbsp; always @ (posedge clk) begin</p>
+<p>&nbsp; &nbsp; if (reset)</p>
+<p>&nbsp; &nbsp; &nbsp; output_seq &lt;= 0;</p>
+<p>&nbsp; &nbsp; else&nbsp;</p>
+<p>&nbsp; &nbsp; &nbsp; begin</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; if (j&lt;n) begin</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; output_seq &lt;= {output_seq[n-2:0],input_seq[j]};</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; j = j+1;</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; end</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp;<span style="white-space:pre;">&nbsp; &nbsp;&nbsp;</span>else</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; output_seq &lt;= {output_seq[n-2:0],1&apos;b0};</p>
+<p>&nbsp; &nbsp; &nbsp; end</p>
+<p>&nbsp; end</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</p>
+<p>endmodule</p>
+
+
+
+
+
+
+
+{% endblock %}

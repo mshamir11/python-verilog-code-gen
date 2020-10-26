@@ -1,0 +1,39 @@
+{% extends 'layouts/main.html' %}
+{% block title %}About{% endblock %}
+{% block content %}
+
+<div class="page-header">
+  <h1>T Flip Flop</h1>
+</div>
+
+
+
+
+
+<p>module Tff(reset,clk,t,q,qnot);</p>
+<p>&nbsp; input reset,clk,t;</p>
+<p>&nbsp; output reg q;</p>
+<p>&nbsp; output qnot;</p>
+<p>&nbsp;&nbsp;</p>
+<p>&nbsp; assign qnot = ~q;</p>
+<p>&nbsp;&nbsp;</p>
+<p>&nbsp; always @(posedge clk)</p>
+<p>&nbsp; &nbsp; begin</p>
+<p>&nbsp; &nbsp; if (reset)</p>
+<p>&nbsp; &nbsp; &nbsp; q &lt;= 0;</p>
+<p>&nbsp; &nbsp; else</p>
+<p>&nbsp; &nbsp; &nbsp; if (t==0)</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; q&lt;=q;</p>
+<p>&nbsp;<span style="white-space:pre;">&nbsp; &nbsp;&nbsp;</span>&nbsp; else if (t==1)</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; q&lt;=~q;</p>
+<p>&nbsp; &nbsp; end</p>
+<p>&nbsp;&nbsp;</p>
+<p>endmodule</p>
+
+
+
+
+
+
+
+{% endblock %}
