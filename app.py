@@ -134,7 +134,7 @@ def custom_counter_form():
 @app.route('/up-counter',methods=['POST','GET'])
 def upcounter():
     result = request.form
-    return render_template('pages/placeholder.upcounter.html',result=result)
+    return render_template('pages/counters/placeholder.upcounter.html',result=result)
 
 @app.route('/johnson-counter',methods=['POST','GET'])
 def johnson_counter():   
@@ -184,14 +184,45 @@ def t_flipflop():
 # Registers
 #----------------------------------------------------------------------------#
 
+#Forms
+#========================================
 @app.route('/siso-form')
 def siso_form():
     return render_template('pages/registers/forms/placeholder.siso_form.html')
+
+@app.route('/pipo-form')
+def pipo_form():
+    return render_template('pages/registers/forms/placeholder.pipo_form.html')
+
+@app.route('/shiftregister-form')
+def shift_register_form():
+    return render_template('pages/registers/forms/placeholder.shiftregisters_form.html')
+
+@app.route('/circularregister-form')
+def circular_register_form():
+    return render_template('pages/registers/forms/placeholder.circularregisters_form.html')
+
+
 
 @app.route('/siso',methods=['POST','GET'])
 def siso():   
     result = request.form
     return render_template('pages/registers/placeholder.siso.html',result=result)
+
+@app.route('/pipo',methods=['POST','GET'])
+def pipo():   
+    result = request.form
+    return render_template('pages/registers/placeholder.pipo.html',result=result)
+
+@app.route('/shiftregister',methods=['POST','GET'])
+def shiftregister():   
+    result = request.form
+    return render_template('pages/registers/placeholder.shiftregister.html',result=result)
+
+@app.route('/circularregister',methods=['POST','GET'])
+def circularregister():   
+    result = request.form
+    return render_template('pages/registers/placeholder.circularregister.html',result=result)
 #----------------------------------------------------------------------------#
 # Launch.
 #----------------------------------------------------------------------------#

@@ -1,0 +1,63 @@
+
+
+
+{% extends 'layouts/main.html' %}
+{% block title %}About{% endblock %}
+{% block content %}
+
+
+
+{% if result.CircularRegister___type=='CircularRegister___left' %}
+
+<div class="page-header">
+  <h1>Left Circular Register </h1>
+</div>
+
+
+<p>module Circular_register(input_seq,clear,reset,clk,output_seq);</p>
+<p>&nbsp; parameter n = 8;</p>
+<p>&nbsp; input [n-1:0] input_seq;</p>
+<p>&nbsp; input reset,clk,clear;</p>
+<p>&nbsp; output reg [n-1:0] output_seq;</p>
+<p>&nbsp;&nbsp;</p>
+<p>&nbsp; always @(posedge clk) begin</p>
+<p>&nbsp; &nbsp; if (clear)</p>
+<p>&nbsp; &nbsp; &nbsp; output_seq &lt;= 0;</p>
+<p>&nbsp; &nbsp; if (reset)</p>
+<p>&nbsp; &nbsp; &nbsp; output_seq &lt;= input_seq;</p>
+<p>&nbsp; <span style="white-space:pre;">&nbsp; &nbsp;&nbsp;</span>else begin</p>
+<p>&nbsp; &nbsp; &nbsp; output_seq &lt;= {output_seq[n-2:0],output_seq[n-1]}</p>
+<p>&nbsp; &nbsp; end</p>
+<p>&nbsp; end</p>
+<p>&nbsp;&nbsp;</p>
+<p>endmodule</p>
+
+
+{% elif result.CircularRegister___type=='CircularRegister___right' %}
+
+<div class="page-header">
+  <h1>Right Circular Register </h1>
+</div>
+<p>module Circular_register(input_seq,clear,reset,clk,output_seq);</p>
+<p>&nbsp; parameter n = 8;</p>
+<p>&nbsp; input [n-1:0] input_seq;</p>
+<p>&nbsp; input reset,clk,clear;</p>
+<p>&nbsp; output reg [n-1:0] output_seq;</p>
+<p>&nbsp;&nbsp;</p>
+<p>&nbsp; always @(posedge clk) begin</p>
+<p>&nbsp; &nbsp; if (clear)</p>
+<p>&nbsp; &nbsp; &nbsp; output_seq &lt;= 0;</p>
+<p>&nbsp; &nbsp; if (reset)</p>
+<p>&nbsp; &nbsp; &nbsp; output_seq &lt;= input_seq;</p>
+<p>&nbsp; <span style="white-space:pre;">&nbsp; &nbsp;&nbsp;</span>else begin</p>
+<p>&nbsp; &nbsp; &nbsp; output_seq &lt;= {output_seq[0],output_seq[1:n-1]}</p>
+<p>&nbsp; &nbsp; end</p>
+<p>&nbsp; end</p>
+<p>&nbsp;&nbsp;</p>
+<p>endmodule</p>
+
+{% endif %}
+
+
+
+{% endblock %}
