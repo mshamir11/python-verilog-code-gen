@@ -134,7 +134,7 @@ def custom_counter_form():
 @app.route('/up-counter',methods=['POST','GET'])
 def upcounter():
     result = request.form
-    return render_template('pages/placeholder.upcounter.html',result=result)
+    return render_template('pages/counters/placeholder.upcounter.html',result=result)
 
 @app.route('/johnson-counter',methods=['POST','GET'])
 def johnson_counter():   
