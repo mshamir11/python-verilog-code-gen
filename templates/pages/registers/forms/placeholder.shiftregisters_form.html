@@ -1,25 +1,30 @@
 {% extends 'layouts/main.html' %}
-{% block title %}Up Counter{% endblock %}
+{% block title %}About{% endblock %}
 {% block content %}
 
 <div class="page-header">
-  <h1>Up Counter</h1>
+  <h1>Shift Register</h1>
 </div>
 
-<form action="{{ url_for('upcounter') }}" onsubmit="return validateForm()" method = "POST">
+<form action="{{ url_for('shiftregister') }}" method = "POST">
   <label for="fname">No. of bits:</label><br>
   <input type="text" id="bits" name="bits" value="" required><br>
   <!-- <label for="lname">Starting Point:</label><br>
   <input type="text" id="spoint" name="spoint" value="" required><br>
   <label for="lname">Ending Point:</label><br>
   <input type="text" id="epoint" name="epoint" value="" required><br><br>
-   -->
- <label for="cars">Choose a type of implementation:</label>
-<select name="implementation" id="implementation">
-  <option value="behavioral">Behavioral</option>
-  <option value="structural">Structural</option> 
+  -->
 
-</select><br> 
+ <label for="ShiftRegister___type">Choose the type:</label>
+  <select name="ShiftRegister___type" id="ShiftRegister___type">
+  <option value="ShiftRegister___left">Left</option>
+  <option value="ShiftRegister___right">Right</option> 
+</select>
+
+
+
+
+<br>  
  <input type="submit" value="Submit"> 
 </form>
 {% endblock %}

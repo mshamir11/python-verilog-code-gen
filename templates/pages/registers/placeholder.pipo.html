@@ -1,0 +1,35 @@
+{% extends 'layouts/main.html' %}
+{% block title %}About{% endblock %}
+{% block content %}
+
+<div class="page-header">
+  <h1>PIPO</h1>
+</div>
+
+
+
+<p>module PIPO_register(input_seq, output_seq,reset, clk,clear);</p>
+<p>&nbsp; parameter n=4;</p>
+<p>&nbsp; input [n-1:0] input_seq;</p>
+<p>&nbsp; input reset,clk,clear;</p>
+<p>&nbsp; output reg [n-1:0] output_seq;&nbsp;</p>
+<p>&nbsp;&nbsp;</p>
+<p>&nbsp; always @ (posedge clk)</p>
+<p>&nbsp; &nbsp; begin</p>
+<p>&nbsp; &nbsp; &nbsp; if (clear)</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; output_seq &lt;= 0;</p>
+<p>&nbsp; &nbsp; &nbsp; if(reset)</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; output_seq &lt;= input_seq;</p>
+<p>&nbsp; &nbsp; &nbsp; else</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; output_seq = {output_seq[n-2:0],1&apos;b0};</p>
+<p>&nbsp; &nbsp; end</p>
+<p>&nbsp;&nbsp;</p>
+<p>endmodule</p>
+
+
+
+
+
+
+
+{% endblock %}

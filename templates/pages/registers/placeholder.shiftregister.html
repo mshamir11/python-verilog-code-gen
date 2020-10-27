@@ -1,0 +1,64 @@
+
+
+
+{% extends 'layouts/main.html' %}
+{% block title %}About{% endblock %}
+{% block content %}
+
+
+
+{% if result.ShiftRegister___type=='ShiftRegister___left' %}
+
+<div class="page-header">
+  <h1>Left Shift Register </h1>
+</div>
+
+
+<p>module shiftregister(D,load,w,clk,Q);</p>
+  <p>&nbsp; parameter n = {{result.bits}};</p>
+  <p>&nbsp; input [n-1:0] D;</p>
+  <p>&nbsp; input load,w,clk;</p>
+  <p>&nbsp; output reg [n-1:0] Q;</p>
+  <p>&nbsp; integer i,k;</p>
+  <p>&nbsp;&nbsp;</p>
+  <p>&nbsp;&nbsp;</p>
+  <p>&nbsp; always @(posedge clk)</p>
+  <p>&nbsp; &nbsp; if (load)</p>
+  <p>&nbsp; &nbsp; &nbsp; Q &lt;= D;</p>
+  <p>&nbsp; <span style="white-space:pre;">&nbsp; &nbsp;&nbsp;</span>else begin</p>
+  <p>&nbsp; &nbsp; &nbsp; Q[0]&lt;=w;</p>
+  <p>&nbsp; &nbsp; &nbsp; for (i=1;i&lt;n;i=i+1)</p>
+  <p>&nbsp; &nbsp; &nbsp; &nbsp; Q[i]&lt;=Q[i-1];</p>
+  <p>&nbsp; &nbsp; end</p>
+  <p>endmodule</p>
+
+
+{% elif result.ShiftRegister___type=='ShiftRegister___right' %}
+
+<div class="page-header">
+  <h1>Right Shift Register </h1>
+</div>
+<p>module shiftregister(D,load,w,clk,R);</p>
+<p>&nbsp; parameter n = {{result.bits}};</p>
+<p>&nbsp; input [n-1:0] D;</p>
+<p>&nbsp; input load,w,clk;</p>
+<p>&nbsp; output reg [n-1:0] R;</p>
+<p>&nbsp; integer i,k;</p>
+<p>&nbsp;&nbsp;</p>
+<p>&nbsp;&nbsp;</p>
+<p>&nbsp; always @(posedge clk)</p>
+<p>&nbsp; &nbsp; if (load)</p>
+<p>&nbsp; &nbsp; &nbsp; R &lt;= D;</p>
+<p>&nbsp; <span style="white-space:pre;">&nbsp; &nbsp;&nbsp;</span>else begin</p>
+<p>&nbsp; &nbsp; &nbsp; for (k=0;k&lt;n-1;k=k+1)</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; R[k]&lt;=R[k+1];</p>
+<p>&nbsp; &nbsp; &nbsp; R[n-1]&lt;=w;</p>
+<p>&nbsp; &nbsp; end</p>
+<p>&nbsp;&nbsp;</p>
+<p>endmodule</p>
+
+{% endif %}
+
+
+
+{% endblock %}
