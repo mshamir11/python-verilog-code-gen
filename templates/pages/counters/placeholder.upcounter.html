@@ -7,7 +7,15 @@
 </div>
 
 {% if result.implementation=='behavioral' %}
-<p>module counter(clk,reset,select,counter); &nbsp;</p>
+
+
+
+
+<div class="row">
+  <div class="col-sm-6">
+
+    <h2>Module</h2>
+    <p>module counter(clk,reset,select,counter); &nbsp;</p>
 <p>&nbsp;&nbsp;</p>
 <p>&nbsp; parameter n = {{result.bits}};</p>
 <p>&nbsp; parameter start_point= 0;</p>
@@ -33,6 +41,24 @@
 <p>&nbsp; &nbsp; &nbsp; end</p>
 <p>&nbsp; &nbsp; end</p>
 <p>endmodule</p>
+
+
+  </div>
+  <div class="col-sm-6">
+
+    <h2>Test Bench</h2>
+    <p>module ringcounter_tb;<br>reg clk,reset;<br>wire [{{(result.bits | int)-1}}:0] Q;<br><br>ringcounter Instance (Q, clk,reset);<br><br>initial begin<br><br>clk = 0;<br>reset = 1;<br>#25;<br>reset = 0;<br>#400;<br>$finish;<br>end<br>always #5 clk = ~clk;<br><br>initial begin<br>$dumpfile(&quot;dump.vcd&quot;);<br>$dumpvars(1);<br>end<br><br>endmodule</p>
+    
+    
+  </div>
+  
+</div> 
+
+
+
+
+<hr>
+
 
 {% elif result.implementation=='structural' %}
 
