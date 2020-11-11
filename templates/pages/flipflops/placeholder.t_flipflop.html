@@ -6,10 +6,10 @@
   <h1>T Flip Flop</h1>
 </div>
 
-
-
-
-
+<div class="row">
+  <div class="col-sm-6">
+    <h2>Module</h2>
+ 
 <p>module Tff(reset,clk,t,q,qnot);</p>
 <p>&nbsp; input reset,clk,t;</p>
 <p>&nbsp; output reg q;</p>
@@ -29,7 +29,33 @@
 <p>&nbsp; &nbsp; end</p>
 <p>&nbsp;&nbsp;</p>
 <p>endmodule</p>
-
+  </div>
+  <div class="col-sm-6">
+    <h2> Test Bench</h2>
+    <p>module test;</p>
+<p>reg clk, reset, t;</p>
+<p>wire q, qnot;</p>
+<p><br></p>
+<p>&nbsp; Tff ins (reset,clk,t,q,qnot);</p>
+<p><br></p>
+<p>initial</p>
+<p>&nbsp; begin</p>
+<p>&nbsp; &nbsp; $dumpfile(&quot;dump.vcd&quot;);</p>
+<p>&nbsp; &nbsp; $dumpvars(1);</p>
+<p>&nbsp; &nbsp; reset=1&apos;b1;</p>
+<p>&nbsp; &nbsp; clk=1&apos;b0;</p>
+<p>#5 &nbsp;reset=1&apos;b0;</p>
+<p>&nbsp; &nbsp; #15 t=1;</p>
+<p>&nbsp; &nbsp; #20 t=0;</p>
+<p>#30 &nbsp;$finish;</p>
+<p>&nbsp; end</p>
+<p><br></p>
+<p>always #1 clk=~clk;</p>
+<p><br></p>
+<p><br></p>
+<p>endmodule</p>
+  </div>
+</div>
 
 
 

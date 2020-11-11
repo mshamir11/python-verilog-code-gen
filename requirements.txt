@@ -1,3 +1,11 @@
+Fabric
+Flask-SQLAlchemy
+Flask-WTF
+WTForms
+coverage
+# ecdsa
+# paramiko
+# pycrypto
 bcrypt==3.2.0
 cffi==1.14.3
 click==7.1.2
@@ -19,3 +27,4 @@ six==1.15.0
 SQLAlchemy==1.3.19
 Werkzeug==1.0.1
 WTForms==2.3.3
+
