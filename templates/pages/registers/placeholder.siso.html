@@ -6,8 +6,9 @@
   <h1>SISO</h1>
 </div>
 
-
-
+<div class="row">
+  <div class="col-sm-6">
+    <h2>Module</h2>
 <p>module SISO_register(output_seq,input_seq,clk,reset);</p>
 <p>&nbsp; parameter n={{result.bits}};</p>
 <p>&nbsp; input [n-1:0] input_seq;</p>
@@ -30,9 +31,51 @@
 <p>&nbsp; end</p>
 <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</p>
 <p>endmodule</p>
+  </div>
+  <div class="col-sm-6">
+    <h2>Test Bench</h2>
+    <p>module test;</p>
+<p><br></p>
+<p>&nbsp; reg [{{(result.bits | int)-1}}:0] input_seq;</p>
+<p>&nbsp; wire [{{(result.bits | int)-1}}:0] output_seq; // it must be wire for testbench</p>
+<p>&nbsp; reg reset;</p>
+<p>&nbsp; reg clk;</p>
+<p><br></p>
+<p>&nbsp; SISO_register siso (output_seq,input_seq,clk,reset);</p>
+<p>&nbsp;&nbsp;</p>
+<p>&nbsp; initial begin</p>
+<p>&nbsp; &nbsp; $dumpfile(&quot;dump.vcd&quot;);</p>
+<p>&nbsp; &nbsp; $dumpvars(1);</p>
+<p>&nbsp; &nbsp; clk = 0;</p>
+<p>&nbsp; &nbsp; reset = 0;</p>
+<p>&nbsp; &nbsp; #10 reset = 1;</p>
+<p>&nbsp; &nbsp;&nbsp;</p>
+<p>&nbsp; &nbsp; #10 reset = 0;input_seq = 4&apos;b1011;</p>
+<p>&nbsp; &nbsp;&nbsp;</p>
+<p>&nbsp; &nbsp; #20 $display(&quot;output:%b&quot;, output_seq);</p>
+<p>&nbsp; &nbsp;&nbsp;</p>
+<p>&nbsp; &nbsp; #20 $display(&quot;output:%b&quot;, output_seq);</p>
+<p>&nbsp; &nbsp;&nbsp;</p>
+<p>&nbsp; &nbsp; #20 $display(&quot;output:%b&quot;, output_seq);</p>
+<p>&nbsp; &nbsp; &nbsp;#20 $display(&quot;output:%b&quot;, output_seq);</p>
+<p>&nbsp; &nbsp; &nbsp;#20 $display(&quot;output:%b&quot;, output_seq);</p>
+<p>&nbsp; &nbsp; &nbsp;#20$display(&quot;output:%b&quot;, output_seq);</p>
+<p>&nbsp; &nbsp; &nbsp;#20 $display(&quot;output:%b&quot;, output_seq);</p>
+<p>&nbsp; &nbsp;&nbsp;</p>
+<p>&nbsp; &nbsp; #20 $display(&quot;output:%b&quot;, output_seq);</p>
+<p>&nbsp; &nbsp; #20 $display(&quot;output:%b&quot;, output_seq);</p>
+<p>&nbsp; &nbsp; &nbsp;#20 $display(&quot;output:%b&quot;, output_seq);</p>
+<p>&nbsp; &nbsp; &nbsp;#20 $display(&quot;output:%b&quot;, output_seq);</p>
+<p>&nbsp; &nbsp; &nbsp;#20 $display(&quot;output:%b&quot;, output_seq);</p>
+<p>&nbsp; &nbsp;&nbsp;</p>
+<p>&nbsp; end</p>
+<p>&nbsp;&nbsp;</p>
+<p>&nbsp; always #10 clk = ~clk;</p>
+<p><br></p>
+<p>endmodule</p>
 
-
-
+  </div>
+</div>
 
 
 
