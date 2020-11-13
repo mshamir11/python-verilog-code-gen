@@ -1,5 +1,5 @@
 {% extends 'layouts/main.html' %}
-{% block title %}Down Counter{% endblock %}
+{% block title %}About{% endblock %}
 {% block content %}
 
 <div class="page-header">
@@ -7,7 +7,11 @@
 </div>
 
 {% if result.implementation=='behavioral' %}
-<p>module counter(clk,reset,select,counter); &nbsp;</p>
+<div class="row">
+  <div class="col-sm-6">
+
+    <h2>Module</h2>
+    <p>module counter(clk,reset,select,counter); &nbsp;</p>
 <p>&nbsp;&nbsp;</p>
 <p>&nbsp; parameter n = {{result.bits}};</p>
 <p>&nbsp; parameter start_point= {{2**(result.bits | int)-1}};</p>
@@ -34,9 +38,23 @@
 <p>&nbsp; &nbsp; end</p>
 <p>endmodule</p>
 
+
+  </div>
+  <div class="col-sm-6">
+    <h2>Test Bench</h2>
+    <p>module synJKcounter_tb;<br /> reg clk,reset;<br /> wire [{{(result.bits | int)-1}}:0] Q, Qbar;<br /> <br /> synJKcounter Instance (Q, Qbar, clk,reset);<br /> <br /> initial begin<br /> <br /> clk = 0;<br /> reset = 1; <br /> #25;<br /> reset = 0;<br /> #400;<br /> $finish;<br /> end<br /> always #5 clk = ~clk;<br /> <br /> initial begin <br /> $dumpfile("dump.vcd");<br /> $dumpvars(1);<br /> end</p><p>endmodule</p>
+  </div>
+
+</div>
+
+<hr>
+
 {% elif result.implementation=='structural' %}
 
-<p>module JKff(reset,clk,j,k,q,qnot);</p>
+<div class="row">
+  <div class="=col-sm-6">
+    <h2>Module</h2>
+    <p>module JKff(reset,clk,j,k,q,qnot);</p>
 <p>&nbsp; input reset,clk,j,k;</p>
 <p>&nbsp; output reg q;</p>
 <p>&nbsp; output qnot;</p>
@@ -107,6 +125,37 @@
 
 
 <p>endmodule</p>
+
+
+  </div>
+  <div class="col-sm-6">
+    <h2>Test Bench</h2>
+    <p>module synJKcounter_tb;</p>
+<p>&nbsp; reg clk,reset;</p>
+<p>&nbsp; wire [{{(result.bits | int)-1}}:0] Q, Qbar;</p>
+<p>&nbsp;&nbsp;</p>
+<p>&nbsp; synJKcounter Instance (Q, Qbar, clk,reset);</p>
+<p>&nbsp;&nbsp;</p>
+<p>&nbsp; initial begin</p>
+<p>&nbsp; &nbsp;&nbsp;</p>
+<p>&nbsp; &nbsp; clk = 0;</p>
+<p>&nbsp; &nbsp; reset = 1;&nbsp;</p>
+<p>&nbsp; &nbsp; #25;</p>
+<p>&nbsp; &nbsp; reset = 0;</p>
+<p>&nbsp; &nbsp; #400;</p>
+<p>&nbsp; &nbsp; $finish;</p>
+<p>&nbsp; end</p>
+<p>&nbsp; always #5 clk = ~clk;</p>
+<p>&nbsp;&nbsp;</p>
+<p>&nbsp; initial begin&nbsp;</p>
+<p>&nbsp; &nbsp; $dumpfile(&quot;dump.vcd&quot;);</p>
+<p>&nbsp; &nbsp; $dumpvars(1);</p>
+<p>&nbsp; end</p>
+<p><br></p>
+<p>endmodule</p>
+  </div>
+
+</div>
 
 {% endif %}
 

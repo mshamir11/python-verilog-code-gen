@@ -1,11 +1,14 @@
 {% extends 'layouts/main.html' %}
-{% block title %}Ring Counter{% endblock %}
+{% block title %}About{% endblock %}
 {% block content %}
 
 <div class="page-header">
   <h1>Ring Counter</h1>
 </div>
 
+<div class="row">
+  <div class="col-sm-6">
+    <h2>Module</h2>
 <p>module ringcounter(Q,clk,reset);</p>
 <p>&nbsp; parameter n={{result.bits}};</p>
 <p>&nbsp; input clk,reset;</p>
@@ -21,8 +24,34 @@
 <p>&nbsp; &nbsp; &nbsp; end</p>
 <p>&nbsp; &nbsp; end</p>
 <p>endmodule</p>
-
-
+    </div>
+    <div class="col-sm-6">
+      <h2>Test Bench</h2>
+      <p>module ringcounter_tb;</p>
+<p>&nbsp; reg clk,reset;</p>
+<p>&nbsp; wire [{{(result.bits | int)-1}}:0] Q;</p>
+<p>&nbsp;&nbsp;</p>
+<p>&nbsp; ringcounter Instance (Q, clk,reset);</p>
+<p>&nbsp;&nbsp;</p>
+<p>&nbsp; initial begin</p>
+<p>&nbsp; &nbsp;&nbsp;</p>
+<p>&nbsp; &nbsp; clk = 0;</p>
+<p>&nbsp; &nbsp; reset = 1;&nbsp;</p>
+<p>&nbsp; &nbsp; #25;</p>
+<p>&nbsp; &nbsp; reset = 0;</p>
+<p>&nbsp; &nbsp; #400;</p>
+<p>&nbsp; &nbsp; $finish;</p>
+<p>&nbsp; end</p>
+<p>&nbsp; always #5 clk = ~clk;</p>
+<p>&nbsp;&nbsp;</p>
+<p>&nbsp; initial begin&nbsp;</p>
+<p>&nbsp; &nbsp; $dumpfile(&quot;dump.vcd&quot;);</p>
+<p>&nbsp; &nbsp; $dumpvars(1);</p>
+<p>&nbsp; end</p>
+<p><br></p>
+<p>endmodule</p>
+    </div>
+</div>
 <!-- <p>&nbsp; wire b;</p>
 <p>&nbsp; assign b = a&amp;Q[1];</p>
 <p>&nbsp; JKff a3 (reset,clk,b,b,Q[2],Qbar[2]);</p>
