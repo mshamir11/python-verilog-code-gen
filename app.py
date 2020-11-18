@@ -240,18 +240,29 @@ def floating_adder_form():
 def floating_subtracter_form():
     return render_template('pages/floating_modules/forms/placeholder.floating_subtracter_form.html')
 
+@app.route('/floating-multiplication-form')
+def floating_multiplication_form():
+    return render_template('pages/floating_modules/forms/placeholder.floating_multiplication_form.html')
+
+@app.route('/floating-division-form')
+def floating_division_form():
+    return render_template('pages/floating_modules/forms/placeholder.floating_division_form.html')
+
 
 #========================================
 @app.route('/floating-adder',methods=['POST','GET'])
 def floating_adder():   
     result = request.form
-    sign_bit_a, exp_str_a, mant_str_a = ieeconv.floatingPoint(int(result['bits_a'])) 
-    sign_bit_b, exp_str_b, mant_str_b = ieeconv.floatingPoint(int(result['bits_b'])) 
+    sign_bit_a, exp_str_a, mant_str_a = ieeconv.floatingPoint(float(result['bits_a'])) 
+    sign_bit_b, exp_str_b, mant_str_b = ieeconv.floatingPoint(float(result['bits_b'])) 
     
     # Final Floating point Representation. 
     ieee_32_a = str(32)+'\'b'+str(sign_bit_a) + '_' + exp_str_a + '_' + mant_str_a
     ieee_32_b = str(32)+'\'b'+str(sign_bit_b) + '_' + exp_str_b + '_' + mant_str_b
-    
+    if len(ieee_32_a)>38:
+        ieee_32_a = ieee_32_a[:38]
+    if len(ieee_32_b)>38:
+        ieee_32_b = ieee_32_b[:38]
     iee_dic={}
     iee_dic['a']=ieee_32_a
     iee_dic['b'] = ieee_32_b
@@ -261,17 +272,58 @@ def floating_adder():
 @app.route('/floating-subtracter',methods=['POST','GET'])
 def floating_subtracter():   
     result = request.form
-    sign_bit_a, exp_str_a, mant_str_a = ieeconv.floatingPoint(int(result['bits_a'])) 
-    sign_bit_b, exp_str_b, mant_str_b = ieeconv.floatingPoint(int(result['bits_b'])) 
+    sign_bit_a, exp_str_a, mant_str_a = ieeconv.floatingPoint(float(result['bits_a'])) 
+    sign_bit_b, exp_str_b, mant_str_b = ieeconv.floatingPoint(float(result['bits_b'])) 
     
     # Final Floating point Representation. 
     ieee_32_a = str(32)+'\'b'+str(sign_bit_a) + '_' + exp_str_a + '_' + mant_str_a
     ieee_32_b = str(32)+'\'b'+str(sign_bit_b) + '_' + exp_str_b + '_' + mant_str_b
-    
+    if len(ieee_32_a)>38:
+        ieee_32_a = ieee_32_a[:38]
+    if len(ieee_32_b)>38:
+        ieee_32_b = ieee_32_b[:38]
     iee_dic={}
     iee_dic['a']=ieee_32_a
     iee_dic['b'] = ieee_32_b
+    
+    
     return render_template('pages/floating_modules/placeholder.floating_subtracter.html',result=iee_dic)
+
+@app.route('/floating-multiplication',methods=['POST','GET'])
+def floating_multiplication():   
+    result = request.form
+    sign_bit_a, exp_str_a, mant_str_a = ieeconv.floatingPoint(float(result['bits_a'])) 
+    sign_bit_b, exp_str_b, mant_str_b = ieeconv.floatingPoint(float(result['bits_b'])) 
+    
+    # Final Floating point Representation. 
+    ieee_32_a = str(32)+'\'b'+str(sign_bit_a) + '_' + exp_str_a + '_' + mant_str_a
+    ieee_32_b = str(32)+'\'b'+str(sign_bit_b) + '_' + exp_str_b + '_' + mant_str_b
+    if len(ieee_32_a)>38:
+        ieee_32_a = ieee_32_a[:38]
+    if len(ieee_32_b)>38:
+        ieee_32_b = ieee_32_b[:38]
+    iee_dic={}
+    iee_dic['a']=ieee_32_a
+    iee_dic['b'] = ieee_32_b
+    return render_template('pages/floating_modules/placeholder.floating_multiplication.html',result=iee_dic)
+
+@app.route('/floating-division',methods=['POST','GET'])
+def floating_division():   
+    result = request.form
+    sign_bit_a, exp_str_a, mant_str_a = ieeconv.floatingPoint(float(result['bits_a'])) 
+    sign_bit_b, exp_str_b, mant_str_b = ieeconv.floatingPoint(float(result['bits_b'])) 
+    
+    # Final Floating point Representation. 
+    ieee_32_a = str(32)+'\'b'+str(sign_bit_a) + '_' + exp_str_a + '_' + mant_str_a
+    ieee_32_b = str(32)+'\'b'+str(sign_bit_b) + '_' + exp_str_b + '_' + mant_str_b
+    if len(ieee_32_a)>38:
+         ieee_32_a = ieee_32_a[:38]
+    if len(ieee_32_b)>38:
+        ieee_32_b = ieee_32_b[:38]
+    iee_dic={}
+    iee_dic['a']=ieee_32_a
+    iee_dic['b'] = ieee_32_b
+    return render_template('pages/floating_modules/placeholder.floating_division.html',result=iee_dic)
 # FSM
 #----------------------------------------------------------------------------#
 

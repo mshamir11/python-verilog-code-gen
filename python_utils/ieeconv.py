@@ -85,17 +85,3 @@ def floatingPoint(real_no):
     # and Mantissa Bit strings. 
     return sign_bit, exp_str, mant_str 
   
-# Driver Code 
-if __name__ == "__main__": 
-  
-    # Function call to get 
-    # Sign, Exponent and  
-    # Mantissa Bit Strings. 
-    sign_bit, exp_str, mant_str = floatingPoint( 125.125) 
-  
-    # Final Floating point Representation. 
-    ieee_32 = str(sign_bit) + '|' + exp_str + '|' + mant_str 
-  
-    # Printing the ieee 32 represenation. 
-    print("IEEE 754 representation of -2.250000 is :") 
-    print(ieee_32) 
