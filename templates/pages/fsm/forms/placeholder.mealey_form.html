@@ -1,0 +1,101 @@
+{% extends 'layouts/main.html' %}
+{% block title %}Custom Counter Form{% endblock %}
+{% block content %}
+
+<div class="page-header">
+  <h1>FSM : State table to verilog code</h1>
+</div>
+
+<div>
+<button onclick='add()'>
+ Add
+</button>
+<p>&nbsp</p>
+
+</div>
+<form id="test" method="post" action="{{ url_for('fsm_moore') }}">
+
+<table class="table table-bordered" >
+<thead class="thead-dark">
+  <tr>
+    <th scope="col" rowspan="2">Present State</th>
+    <th scope="col" colspan="2">Next State</th>
+    <th scope="col" colspan="2">Output</th>
+  </tr>
+  <tr>
+    <td colspan="1">w =0</td>
+    
+    
+    <td colspan="1">w=1</td>
+    <td colspan="1">w=0</td>
+   
+    <td colspan="1">w=1</td>
+  
+  </tr>
+  <tr><td><input type="text" name="present" required /></td><td> <input type="text" name="next_0" required /></td><td><input type="text" name="next_1" required/></td><td><input type="text" name="output_0" required/></td><td><input type="text" name="output_1" required/></td><td></tr>
+</thead>
+</table>
+<button type="submit" class="btn btn-primary">Submit</button>
+</form>
+<!-- <table class="table table-bordered">
+  <tr>
+    <thead>
+      <th colspan="2">1</th>
+      <th>2</th>
+      <th>3</th>
+    </thead>
+  </tr>
+  <tr>
+    <td colspan="2">A</td>
+    <td>A</td>
+    <td>A</td>
+  </tr>
+  <tr>
+    <td rowspan="2">B</td>
+    <td>B1</td>
+    <td>B1</td>
+    <td>B1</td>
+  </tr>
+  <tr>
+    <td>B2</td>
+    <td>B2</td>
+    <td>B2</td>
+  </tr>
+</table> -->
+<script>
+  var count =0;
+  function add() {
+  count++;
+  $("table").append("<tr><td><input type=\"text\" name=\"present\" required /></td><td> <input type=\"text\" name=\"next_0\" required /></td><td><input type=\"text\" name=\"next_1\" required/></td><td><input type=\"text\" name=\"output_0\" required/></td><td><input type=\"text\" name=\"output_1\" required/></td><td><button onclick='rm()'>remove</button></td></tr>");
+}
+function rm() {
+  $(event.target).closest("tr").remove();
+}
+</script>
+<!-- <script type="text/javascript">
+  
+  var table = '';
+  var rows = 10;
+  var cols = 10;
+  table +=
+    '  <thead class= "thead-dark" ><tr><th scope="col">States</th><th scope="col">Present State</th><th scope="col">Next State</th><th scope="col">Output</th></tr></thead>'
+  for (var r = 0; r < rows; r++)
+
+  {
+    table += '<tr>';
+
+
+    for (var c = 1; c < cols; c++) {
+      table += '<td>' + c + '</td>';
+    }
+    table += '</tr>';
+  }
+  document.write('<table class="table" >' + table + '</table>')
+
+
+</script> -->
+
+
+
+
+{% endblock %}

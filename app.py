@@ -332,15 +332,31 @@ def floating_division():
 
 
 
-@app.route('/fsm-form')
-def fsm_form():
-    return render_template('pages/fsm/forms/placeholder.fsm_form.html')
+@app.route('/fsm-moore-form')
+def fsm_moore_form():
+    return render_template('pages/fsm/forms/placeholder.moore_form.html')
 
 
-@app.route('/fsm',methods=['POST','GET'])
-def fsm():   
+@app.route('/fsm-moore',methods=['POST','GET'])
+def fsm_moore():   
     result = request.form
-    return render_template('pages/fsm/placeholder.fsm.html',result=result)
+    result_dic =result.to_dict(flat=False)
+    print(result_dic)
+    return render_template('pages/fsm/placeholder.moore.html',result=result_dic)
+
+
+
+@app.route('/fsm-mealey-form')
+def fsm_mealey_form():
+    return render_template('pages/fsm/forms/placeholder.mealey_form.html')
+
+
+@app.route('/fsm-mealey',methods=['POST','GET'])
+def fsm_mealey():   
+    result = request.form
+    result_dic =result.to_dict(flat=False)
+    print(result_dic['present'])
+    return render_template('pages/fsm/placeholder.fsm_mealey.html',result=result_dic)
 #----------------------------------------------------------------------------#
 # Launch.
 #----------------------------------------------------------------------------#
