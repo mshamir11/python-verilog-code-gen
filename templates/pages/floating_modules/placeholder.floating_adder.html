@@ -10,6 +10,7 @@
 
 <div class="row">
   <div class="col-sm-6">
+    <h2>Module</h2>
     <p>module Floating_adder(a,b,sum);</p>
     <p>&nbsp; input [31:0] a,b;</p>
     <p>&nbsp; output [31:0] sum;</p>
@@ -66,6 +67,7 @@
   </div>
 
   <div class="col-sm-6">
+    <h2>Test Bench</h2>
     <p>module testbench;</p>
     <p>&nbsp; reg [31:0] a;</p>
     <p>&nbsp; reg [31:0] b;</p>
@@ -78,8 +80,8 @@
     <p>&nbsp; &nbsp; &nbsp; $dumpfile(&quot;dump.vcd&quot;);</p>
     <p>&nbsp; &nbsp; &nbsp; $dumpvars(1);</p>
     <p><br></p>
-    <p>&nbsp; &nbsp; &nbsp; a = 32&apos;b0_10000010_0011_1000_0000_0000_0000_000;</p>
-    <p>&nbsp; &nbsp; &nbsp; b = 32&apos;b0_01111110_0010_0000_0000_0000_0000_000;</p>
+    <p>&nbsp; &nbsp; &nbsp; a = {{result.bits_a}};</p>
+    <p>&nbsp; &nbsp; &nbsp; b = {{result.bits_b}};</p>
     <p>&nbsp; &nbsp; &nbsp; #5 $display(&quot;THis is testbench A:%b B:%b Sum:%b&quot;,a,b,sum);</p>
     <p>&nbsp; &nbsp; &nbsp;&nbsp;</p>
     <p>&nbsp; &nbsp; end</p>
