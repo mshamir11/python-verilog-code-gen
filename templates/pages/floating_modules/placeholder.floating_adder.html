@@ -1,0 +1,96 @@
+{% extends 'layouts/main.html' %}
+{% block title %}Floating Adder Code{% endblock %}
+{% block content %}
+
+<div class="page-header">
+  <h1>Floating Adder</h1>
+</div>
+
+
+
+<div class="row">
+  <div class="col-sm-6">
+    <h2>Module</h2>
+    <p>module Floating_adder(a,b,sum);</p>
+    <p>&nbsp; input [31:0] a,b;</p>
+    <p>&nbsp; output [31:0] sum;</p>
+    <p>&nbsp; wire sign_a, sign_b;</p>
+    <p>&nbsp; reg sign_sum;</p>
+    <p>&nbsp; wire [7:0] exp_a,exp_b,exp_sum,exp_diff;</p>
+    <p>&nbsp; reg [22:0] mat_a,mat_b;</p>
+    <p>&nbsp; reg [23:0] mat_sum;</p>
+    <p>&nbsp;&nbsp;</p>
+    <p>&nbsp; assign sign_a = a[31];</p>
+    <p>&nbsp; assign sign_b = b[31];</p>
+    <p>&nbsp; assign exp_a = a[30:23];</p>
+    <p>&nbsp; assign exp_b = b[30:23];</p>
+    <p>&nbsp;&nbsp;</p>
+    <p>&nbsp; assign exp_sum = (exp_a&gt;=exp_b)? exp_a:exp_b;</p>
+    <p>&nbsp; assign exp_diff = (exp_a&gt;=exp_b)? (exp_a-exp_b):(exp_b-exp_a);</p>
+    <p>&nbsp;&nbsp;</p>
+    <p>&nbsp; always @(a) begin</p>
+    <p>&nbsp; &nbsp; mat_a = a[22:0];</p>
+    <p>&nbsp; &nbsp; mat_b = b[22:0];</p>
+    <p>&nbsp; &nbsp;&nbsp;</p>
+    <p>&nbsp; &nbsp; if (exp_a&gt;exp_b &amp;&amp; exp_diff&gt;0) begin&nbsp;</p>
+    <p>&nbsp; &nbsp; &nbsp; mat_b = {1&apos;b1,mat_b[22:1]};</p>
+    <p>&nbsp; &nbsp; &nbsp; for (int i=1; i&lt;exp_diff; i=i+1) begin</p>
+    <p>&nbsp; &nbsp; &nbsp; &nbsp; mat_b = {1&apos;b0,mat_b[22:1]};</p>
+    <p>&nbsp; &nbsp; &nbsp; end</p>
+    <p>&nbsp; &nbsp; end</p>
+    <p>&nbsp; &nbsp; else if (exp_b&gt;exp_a &amp;&amp; exp_diff&gt;0) begin&nbsp;</p>
+    <p>&nbsp; &nbsp; &nbsp; mat_a = {1&apos;b1,mat_a[22:1]};</p>
+    <p>&nbsp; &nbsp; &nbsp; for (int i=1; i&lt;exp_diff; i=i+1) begin</p>
+    <p>&nbsp; &nbsp; &nbsp; &nbsp; mat_a = {1&apos;b0,mat_a[22:1]};</p>
+    <p>&nbsp; &nbsp; &nbsp; end</p>
+    <p>&nbsp; &nbsp; end</p>
+    <p>&nbsp; &nbsp;&nbsp;</p>
+    <p>&nbsp; &nbsp; if (sign_a==sign_b) begin</p>
+    <p>&nbsp; &nbsp; &nbsp; sign_sum = sign_a;</p>
+    <p>&nbsp; &nbsp; &nbsp; mat_sum = mat_a+mat_b;</p>
+    <p>&nbsp; &nbsp; &nbsp;&nbsp;</p>
+    <p>&nbsp; &nbsp; end</p>
+    <p>&nbsp; &nbsp; else if (mat_a&gt;mat_b) begin</p>
+    <p>&nbsp; &nbsp; &nbsp; &nbsp; sign_sum = sign_a;</p>
+    <p>&nbsp; &nbsp; &nbsp; &nbsp; mat_sum = mat_a-mat_b;</p>
+    <p>&nbsp; &nbsp; &nbsp; end</p>
+    <p>&nbsp; &nbsp; else begin</p>
+    <p>&nbsp; &nbsp; &nbsp; &nbsp; sign_sum = sign_b;</p>
+    <p>&nbsp; &nbsp; &nbsp; &nbsp; mat_sum = mat_b-mat_a;</p>
+    <p>&nbsp; &nbsp; end</p>
+    <p>&nbsp; end</p>
+    <p>&nbsp;&nbsp;</p>
+    <p>&nbsp; assign sum = {sign_sum,exp_sum,mat_sum[22:0]};</p>
+    <p><br></p>
+    <p>endmodule</p>
+
+  </div>
+
+  <div class="col-sm-6">
+    <h2>Test Bench</h2>
+    <p>module testbench;</p>
+    <p>&nbsp; reg [31:0] a;</p>
+    <p>&nbsp; reg [31:0] b;</p>
+    <p>&nbsp; wire [31:0] sum;</p>
+    <p>&nbsp;&nbsp;</p>
+    <p>&nbsp; Floating_adder ins(a,b,sum);</p>
+    <p>&nbsp;&nbsp;</p>
+    <p>&nbsp; initial</p>
+    <p>&nbsp; &nbsp; begin</p>
+    <p>&nbsp; &nbsp; &nbsp; $dumpfile(&quot;dump.vcd&quot;);</p>
+    <p>&nbsp; &nbsp; &nbsp; $dumpvars(1);</p>
+    <p><br></p>
+    <p>&nbsp; &nbsp; &nbsp; a = {{result.bits_a}};</p>
+    <p>&nbsp; &nbsp; &nbsp; b = {{result.bits_b}};</p>
+    <p>&nbsp; &nbsp; &nbsp; #5 $display(&quot;THis is testbench A:%b B:%b Sum:%b&quot;,a,b,sum);</p>
+    <p>&nbsp; &nbsp; &nbsp;&nbsp;</p>
+    <p>&nbsp; &nbsp; end</p>
+    <p>&nbsp;&nbsp;</p>
+    <p>&nbsp;&nbsp;</p>
+    <p>endmodule</p>
+  </div>
+  
+</div> 
+
+
+{% endblock %}
