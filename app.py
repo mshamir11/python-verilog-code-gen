@@ -9,7 +9,7 @@ from logging import Formatter, FileHandler
 from forms import *
 import os
 from python_utils import ieeconv
-
+import math
 #----------------------------------------------------------------------------#
 # App Config.
 #----------------------------------------------------------------------------#
@@ -342,7 +342,12 @@ def fsm_moore():
     result = request.form
     result_dic =result.to_dict(flat=False)
     print(result_dic)
-    return render_template('pages/fsm/placeholder.moore.html',result=result_dic)
+    log_count = math.log2(len(result_dic['present']))
+    if log_count != int(log_count):
+        log_count=int(log_count)+1
+    else:
+        log_count = int(log_count)
+    return render_template('pages/fsm/placeholder.moore.html',result=result_dic,count=log_count)
 
 
 
@@ -355,8 +360,8 @@ def fsm_mealey_form():
 def fsm_mealey():   
     result = request.form
     result_dic =result.to_dict(flat=False)
-    print(result_dic['present'])
-    return render_template('pages/fsm/placeholder.fsm_mealey.html',result=result_dic)
+    print(result_dic)
+    return render_template('pages/fsm/placeholder.mealey.html',result=result_dic)
 #----------------------------------------------------------------------------#
 # Launch.
 #----------------------------------------------------------------------------#

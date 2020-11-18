@@ -3,14 +3,72 @@
 {% block content %}
 
 <div class="page-header">
-  <h1>Verilog Code</h1>
+  <h1>Moore Implementation Code</h1>
+</div>
+<div class="row">
+  <div class="col-sm-6">
+    <h2>Module</h2>
+<p>module moore(clk,rst,w,z);
+  <br>input clk,rst,w;<br>output z;
+  <br>reg [{{count-1}}:0] y,Y;
+  <br>parameter [{{count-1}}:0] 
+  
+  {% set counter =namespace(value=0) %}
+  {% for item in result.present[:-1] %}
+  {{item}}={{counter.value}} ,
+  {% set counter.value=counter.value + 1 %}
+  {% endfor %}
+  {{result.present[-1] }}={{counter.value}};<br>
+  
+  <br>always @(w,y)<br>
+  case(y)<br>
+  {% set counter =namespace(value=0) %}
+  {% for item in result.present %}
+  {{item}}:if (w) Y={{result.next_state_1[counter.value]}};<br>
+  else Y= {{result.next_state_0[counter.value]}};<br>
+  {% set counter.value=counter.value + 1 %}
+  
+  
+  {% endfor %}
+<br>default:
+  Y={{count-1}}&apos;b{% for i in range(count-1)%}x{% endfor %};<br>endcase<br>
+  
+  <br>always @(negedge rst, posedge clk)<br>if
+  (rst==0)<br>y&lt;=A;<br>else<br>y&lt;=Y;<br>
+  
+  
+  {% set counter =namespace(value=0) %}
+  {% set myList =[] %}
+  {% for i in range (result.output|length)%}
+{% if result.output[i] =='1'%}
+
+{% set temp = (i,result.present[i])%}
+
+{{ myList.append(temp) or '' }}
+{% set counter.value=counter.value + 1 %}
+{% endif %}
+{% endfor %}
+<br>assign z=
+  {% for i in range (myList|length -1)%}
+
+  (y=={{myList[i][1]}} |  
+  
+  {% endfor %}
+  (y=={{myList[-1][1]}});
+  
+  <br>endmodule</p>
+
+
+</div>
+<div class="col-sm-6">
+  <h2>Sample Test Bench</h2>
+  <p>module testbench;<br><br>reg clk, rst, w;<br>wire z;<br><br>moore ins (clk,rst,w,z);<br><br>initial begin<br>$dumpfile(&quot;dump.vcd&quot;);<br>$dumpvars(0);<br>rst = 0;<br>#5 rst = 1;<br>clk = 0;<br>w = 1;<br>$display(&quot;z: %0h&quot;,z);<br>#10<br>w = 1;<br>$display(&quot;z: %0h&quot;,z);<br>#10<br>w = 0;<br>$display(&quot;z: %0h&quot;,z);<br>#10<br>w = 0;<br>$display(&quot;z: %0h&quot;,z);<br>#10<br>w = 0;<br>$display(&quot;z: %0h&quot;,z);<br>#10<br>w = 0;<br>$display(&quot;z: %0h&quot;,z);<br>#10<br>w = 1;<br>$display(&quot;z: %0h&quot;,z);<br>#10<br>w = 1;<br>$display(&quot;z: %0h&quot;,z);<br>#10<br>w = 0;<br>$display(&quot;z: %0h&quot;,z);<br>#10<br>w = 0;<br>$display(&quot;z: %0h&quot;,z);<br>#10<br>w = 0;<br>$display(&quot;z: %0h&quot;,z);<br>#10<br>w = 1;<br>$display(&quot;z: %0h&quot;,z);<br>#10<br>w = 1;<br>$display(&quot;z: %0h&quot;,z);<br>//1100001100011<br>end<br><br>always #5 clk=~clk;<br>initial #150 $finish;<br><br>endmodule</p>
+
 </div>
 
-<p>
 
 
-{% for item in result.present%}
-{{item}}
-{% endfor %}
-</p>
+
+
+
 {% endblock %}

@@ -18,15 +18,23 @@
 <table class="table table-bordered" >
 <thead class="thead-dark">
   <tr>
-    <th scope="col" >Present State</th>
-    <th scope="col" >Next State</th>
-    <th scope="col" >Output</th>
+    <th scope="col" rowspan="2" >Present State</th>
+    <th scope="col" colspan="2">Next State</th>
+    <th scope="col"rowspan="2" >Output</th>
+  </tr>
+  <tr>
+  <td colspan="1">w =0</td>
+    
+    
+    <td colspan="1">w=1</td>
   </tr>
   <tr>
     <td><input type="text" name="present" required/></td>
     
     
-    <td><input type="text" name="next_state" required/></td>
+    <td><input type="text" name="next_state_0" required/></td>
+    <td><input type="text" name="next_state_1" required/></td>
+
     <td><input type="text" name="output" required/></td>
    
     
@@ -66,7 +74,7 @@
   var count =0;
   function add() {
   count++;
-  $("table").append("<tr><td><input type=\"text\" name=\"present\" required/></td><td><input type=\"text\" name=\"next_state\" required/></td><td><input type=\"text\" name=\"output\" required/></td><td><button onclick='rm()'>remove</button></td></tr>");
+  $("table").append("<tr><td><input type=\"text\" name=\"present\" required/></td><td><input type=\"text\" name=\"next_state_0\" required/></td><td><input type=\"text\" name=\"next_state_1\" required/></td><td><input type=\"text\" name=\"output\" required/></td><td><button onclick='rm()'>remove</button></td></tr>");
 }
 function rm() {
   $(event.target).closest("tr").remove();
