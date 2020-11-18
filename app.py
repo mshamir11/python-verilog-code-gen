@@ -223,6 +223,26 @@ def shiftregister():
 def circularregister():   
     result = request.form
     return render_template('pages/registers/placeholder.circularregister.html',result=result)
+
+
+
+
+# FSM
+#----------------------------------------------------------------------------#
+
+#Forms
+#========================================
+
+
+@app.route('/fsm-form')
+def fsm_form():
+    return render_template('pages/fsm/forms/placeholder.fsm_form.html')
+
+
+@app.route('/fsm',methods=['POST','GET'])
+def fsm():   
+    result = request.form
+    return render_template('pages/fsm/placeholder.fsm.html',result=result)
 #----------------------------------------------------------------------------#
 # Launch.
 #----------------------------------------------------------------------------#
