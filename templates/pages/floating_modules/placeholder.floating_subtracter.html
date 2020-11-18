@@ -1,9 +1,9 @@
 {% extends 'layouts/main.html' %}
-{% block title %}Floating Adder Code{% endblock %}
+{% block title %}Floating Subtracter Code{% endblock %}
 {% block content %}
 
 <div class="page-header">
-  <h1>Floating Adder</h1>
+  <h1>Floating Subtracter</h1>
 </div>
 
 
@@ -11,7 +11,7 @@
 <div class="row">
   <div class="col-sm-6">
     <h2>Module</h2>
-    <p>module Floating_adder(a,b,sum);</p>
+    <p>module Floating_subtracter(a,b,sum);</p>
     <p>&nbsp; input [31:0] a,b;</p>
     <p>&nbsp; output [31:0] sum;</p>
     <p>&nbsp; wire sign_a, sign_b;</p>
@@ -21,7 +21,7 @@
     <p>&nbsp; reg [23:0] mat_sum;</p>
     <p>&nbsp;&nbsp;</p>
     <p>&nbsp; assign sign_a = a[31];</p>
-    <p>&nbsp; assign sign_b = b[31];</p>
+    <p>&nbsp; assign sign_b = ~b[31];</p>
     <p>&nbsp; assign exp_a = a[30:23];</p>
     <p>&nbsp; assign exp_b = b[30:23];</p>
     <p>&nbsp;&nbsp;</p>
@@ -73,7 +73,7 @@
     <p>&nbsp; reg [31:0] b;</p>
     <p>&nbsp; wire [31:0] sum;</p>
     <p>&nbsp;&nbsp;</p>
-    <p>&nbsp; Floating_adder ins(a,b,sum);</p>
+    <p>&nbsp; Floating_subtracter ins(a,b,sum);</p>
     <p>&nbsp;&nbsp;</p>
     <p>&nbsp; initial</p>
     <p>&nbsp; &nbsp; begin</p>
