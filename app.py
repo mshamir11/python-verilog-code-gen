@@ -233,12 +233,21 @@ def circularregister():
 def floating_adder_form():
     return render_template('pages/floating_modules/forms/placeholder.floating_adder_form.html')
 
+@app.route('/floating-subtracter-form')
+def floating_subtracter_form():
+    return render_template('pages/floating_modules/forms/placeholder.floating_subtracter_form.html')
+
 
 #========================================
 @app.route('/floating-adder',methods=['POST','GET'])
 def floating_adder():   
     result = request.form
     return render_template('pages/floating_modules/placeholder.floating_adder.html',result=result)
+
+@app.route('/floating-subtracter',methods=['POST','GET'])
+def floating_subtracter():   
+    result = request.form
+    return render_template('pages/floating_modules/placeholder.floating_subtracter.html',result=result)
 #----------------------------------------------------------------------------#
 # Launch.
 #----------------------------------------------------------------------------#
