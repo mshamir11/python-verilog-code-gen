@@ -223,6 +223,22 @@ def shiftregister():
 def circularregister():   
     result = request.form
     return render_template('pages/registers/placeholder.circularregister.html',result=result)
+
+#Floating Point Modules
+#----------------------------------------------------------------------------#
+
+#Forms
+#========================================
+@app.route('/floating-adder-form')
+def floating_adder_form():
+    return render_template('pages/floating_modules/forms/placeholder.floating_adder_form.html')
+
+
+#========================================
+@app.route('/floating-adder',methods=['POST','GET'])
+def floating_adder():   
+    result = request.form
+    return render_template('pages/floating_modules/placeholder.floating_adder.html',result=result)
 #----------------------------------------------------------------------------#
 # Launch.
 #----------------------------------------------------------------------------#
