@@ -346,12 +346,12 @@ def fsm_moore():
 
 
 
-@app.route('/fsm-mealey-form')
+@app.route('/fsm-mealy-form')
 def fsm_mealey_form():
     return render_template('pages/fsm/forms/placeholder.mealey_form.html')
 
 
-@app.route('/fsm-mealey',methods=['POST','GET'])
+@app.route('/fsm-mealy',methods=['POST','GET'])
 def fsm_mealey():   
     result = request.form
     result_dic =result.to_dict(flat=False)
