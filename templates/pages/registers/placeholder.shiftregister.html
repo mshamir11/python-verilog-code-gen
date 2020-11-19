@@ -1,6 +1,3 @@
-
-
-
 {% extends 'layouts/main.html' %}
 {% block title %}Shift Register Code{% endblock %}
 {% block content %}
@@ -19,52 +16,29 @@
 <div class="row">
   <div class="col-sm-6">
     <h2>Module</h2>
-<p>module shiftregister(D,load,w,clk,Q);</p>
-  <p>&nbsp; parameter n = {{result.bits}};</p>
-  <p>&nbsp; input [n-1:0] D;</p>
-  <p>&nbsp; input load,w,clk;</p>
-  <p>&nbsp; output reg [n-1:0] Q;</p>
-  <p>&nbsp; integer i,k;</p>
-  <p>&nbsp;&nbsp;</p>
-  <p>&nbsp;&nbsp;</p>
-  <p>&nbsp; always @(posedge clk)</p>
-  <p>&nbsp; &nbsp; if (load)</p>
-  <p>&nbsp; &nbsp; &nbsp; Q &lt;= D;</p>
-  <p>&nbsp; <span style="white-space:pre;">&nbsp; &nbsp;&nbsp;</span>else begin</p>
-  <p>&nbsp; &nbsp; &nbsp; Q[0]&lt;=w;</p>
-  <p>&nbsp; &nbsp; &nbsp; for (i=1;i&lt;n;i=i+1)</p>
-  <p>&nbsp; &nbsp; &nbsp; &nbsp; Q[i]&lt;=Q[i-1];</p>
-  <p>&nbsp; &nbsp; end</p>
-  <p>endmodule</p>
-</div>
-<div class="col-sm-6">
-  <h2>Test Bench</h2>
-  <p>module SR_tb;</p>
-<p>&nbsp;&nbsp;</p>
-<p>&nbsp; reg [{{(result.bits | int)-1}}:0] D;</p>
-<p>&nbsp; reg load,w,clk;</p>
-<p>&nbsp; wire [{{(result.bits | int)-1}}:0] Q,R;</p>
-<p>&nbsp;&nbsp;</p>
-<p>&nbsp; shiftregister8bit Instance(D,load,w,clk,Q,R);</p>
-<p>&nbsp;&nbsp;</p>
-<p>&nbsp; initial clk = 0;</p>
-<p>&nbsp; always #5 clk=~clk;</p>
-<p>&nbsp;&nbsp;</p>
-<p>&nbsp; initial begin</p>
-<p>&nbsp; &nbsp;&nbsp;</p>
-<p>&nbsp; &nbsp; $dumpfile(&quot;dump.vcd&quot;);</p>
-<p>&nbsp; &nbsp; $dumpvars(0);</p>
-<p>&nbsp; &nbsp;&nbsp;</p>
-<p>&nbsp; &nbsp; load = 0;</p>
-<p>&nbsp; &nbsp; w = 0;</p>
-<p>&nbsp; &nbsp; D = 8&apos;b11111111;&nbsp;</p>
-<p>&nbsp; &nbsp; #1</p>
-<p>&nbsp; &nbsp; $display (&quot;Q:%b &quot;,&quot;R:%b &quot;,&quot;D:%b&quot;,&quot;clk:%b&quot;, Q, R, D, clk);</p>
-<p>&nbsp; &nbsp;&nbsp;</p>
-<p>&nbsp; &nbsp;&nbsp;</p>
-<p>&nbsp; end</p>
-<p>endmodule</p>
-</div>
+    <p>module shiftregister(D,load,w,clk,Q);<br><br>parameter n = {{result.bits}};<br><br>input [n-1:0] D;<br><br>input
+      load,w,clk;<br><br>output reg [n-1:0] Q;<br><br>integer i;<br><br>always @(posedge clk)<br><br>if (load)<br><br>Q
+      &lt;= D;<br><br>else begin<br><br>Q[0]&lt;=w;<br><br>for
+      (i=1;i&lt;n;i=i+1)<br><br>Q[i]&lt;=Q[i-1];<br><br>end<br><br>endmodule</p>
+  </div>
+  <div class="col-sm-6">
+    <h2>Test Bench</h2>
+
+    <p>module SR_tb;<br>reg [{{(result.bits | int)-1}}:0] D;<br>reg load,w,clk;<br>wire [{{(result.bits | int)-1}}:0]
+      Q;<br>shiftregister
+      Instance(D,load,w,clk,Q);<br>initial clk = 0;<br><br>always #5 clk=~clk;<br>initial
+      begin<br>$dumpfile(&quot;dump.vcd&quot;);<br>$dumpvars(0);<br>
+      D = {{result.bits}}&apos;b{% for i in range(result.bits |int)%}1{% endfor %};<br><br>#10 load = 1;<br>#20 load
+      = 0;<br>w = 0;<br><br>#1 $display (&quot;Q:%b D:%b clk:%b&quot;, Q, D, clk);<br>#5 $display (&quot;Q:%b D:%b
+      clk:%b&quot;, Q, D, clk);<br>#5 $display (&quot;Q:%b D:%b clk:%b&quot;, Q, D, clk);<br>#5 $display (&quot;Q:%b
+      D:%b clk:%b&quot;, Q, D, clk);<br>#5 $display (&quot;Q:%b D:%b clk:%b&quot;, Q, D, clk);<br>#5 $display
+      (&quot;Q:%b D:%b clk:%b&quot;, Q, D, clk);<br>#5 $display (&quot;Q:%b D:%b clk:%b&quot;, Q, D, clk);<br>#5
+      $display (&quot;Q:%b D:%b clk:%b&quot;, Q, D, clk);<br>#5 $display (&quot;Q:%b D:%b clk:%b&quot;, Q, D,
+      clk);<br>#5 $display (&quot;Q:%b D:%b clk:%b&quot;, Q, D, clk);<br>#5 $display (&quot;Q:%b D:%b clk:%b&quot;, Q,
+      D, clk);<br>#5 $display (&quot;Q:%b D:%b clk:%b&quot;, Q, D, clk);<br>#5 $display (&quot;Q:%b D:%b clk:%b&quot;,
+      Q, D, clk);<br>#5 $display (&quot;Q:%b D:%b clk:%b&quot;, Q, D, clk);<br>#5 $display (&quot;Q:%b D:%b
+      clk:%b&quot;, Q, D, clk);<br>#5 $display (&quot;Q:%b D:%b clk:%b&quot;, Q, D, clk);<br>end<br><br>endmodule</p>
+  </div>
 </div>
 
 
@@ -78,54 +52,29 @@
 </div>
 <div class="row">
   <div class="col-sm-6">
-  <h2>Module</h2>
-<p>module shiftregister(D,load,w,clk,R);</p>
-<p>&nbsp; parameter n = {{result.bits}};</p>
-<p>&nbsp; input [n-1:0] D;</p>
-<p>&nbsp; input load,w,clk;</p>
-<p>&nbsp; output reg [n-1:0] R;</p>
-<p>&nbsp; integer i,k;</p>
-<p>&nbsp;&nbsp;</p>
-<p>&nbsp;&nbsp;</p>
-<p>&nbsp; always @(posedge clk)</p>
-<p>&nbsp; &nbsp; if (load)</p>
-<p>&nbsp; &nbsp; &nbsp; R &lt;= D;</p>
-<p>&nbsp; <span style="white-space:pre;">&nbsp; &nbsp;&nbsp;</span>else begin</p>
-<p>&nbsp; &nbsp; &nbsp; for (k=0;k&lt;n-1;k=k+1)</p>
-<p>&nbsp; &nbsp; &nbsp; &nbsp; R[k]&lt;=R[k+1];</p>
-<p>&nbsp; &nbsp; &nbsp; R[n-1]&lt;=w;</p>
-<p>&nbsp; &nbsp; end</p>
-<p>&nbsp;&nbsp;</p>
-<p>endmodule</p>
+    <p>module shiftregister(D,load,w,clk,R);<br><br>parameter n = {{result.bits}};<br><br>input [n-1:0] D;<br><br>input
+      load,w,clk;<br><br>output reg [n-1:0] R;<br><br>integer k;<br><br>always @(posedge clk)<br><br>if (load)<br><br>R
+      &lt;= D;<br><br>else begin<br><br>for
+      (k=0;k&lt;n-1;k=k+1)<br><br>R[k]&lt;=R[k+1];<br><br>R[n-1]&lt;=w;<br><br>end<br><br>endmodule</p>
 
   </div>
   <div class="col-sm-6">
     <h2>Test Bench</h2>
-    <p>module SR_tb;</p>
-<p>&nbsp;&nbsp;</p>
-<p>&nbsp; reg [{{(result.bits | int)-1}}:0] D;</p>
-<p>&nbsp; reg load,w,clk;</p>
-<p>&nbsp; wire [{{(result.bits | int)-1}}:0] Q,R;</p>
-<p>&nbsp;&nbsp;</p>
-<p>&nbsp; shiftregister8bit Instance(D,load,w,clk,Q,R);</p>
-<p>&nbsp;&nbsp;</p>
-<p>&nbsp; initial clk = 0;</p>
-<p>&nbsp; always #5 clk=~clk;</p>
-<p>&nbsp;&nbsp;</p>
-<p>&nbsp; initial begin</p>
-<p>&nbsp; &nbsp;&nbsp;</p>
-<p>&nbsp; &nbsp; $dumpfile(&quot;dump.vcd&quot;);</p>
-<p>&nbsp; &nbsp; $dumpvars(0);</p>
-<p>&nbsp; &nbsp;&nbsp;</p>
-<p>&nbsp; &nbsp; load = 0;</p>
-<p>&nbsp; &nbsp; w = 0;</p>
-<p>&nbsp; &nbsp; D = 8&apos;b11111111;&nbsp;</p>
-<p>&nbsp; &nbsp; #1</p>
-<p>&nbsp; &nbsp; $display (&quot;Q:%b &quot;,&quot;R:%b &quot;,&quot;D:%b&quot;,&quot;clk:%b&quot;, Q, R, D, clk);</p>
-<p>&nbsp; &nbsp;&nbsp;</p>
-<p>&nbsp; &nbsp;&nbsp;</p>
-<p>&nbsp; end</p>
-<p>endmodule</p>
+    <p>module SR_tb;<br>reg [{{(result.bits | int)-1}}:0] D;<br>reg load,w,clk;<br>wire [{{(result.bits | int)-1}}:0] R;<br>shiftregister
+      Instance(D,load,w,clk,R);<br>initial clk = 0;<br><br>always #5 clk=~clk;<br>initial
+      begin<br>$dumpfile(&quot;dump.vcd&quot;);<br>$dumpvars(0);
+      
+      <br>D = {{result.bits}}&apos;b{% for i in range(result.bits |int)%}1{% endfor %};<br>
+      <br>#10 load = 1;<br>#20 load
+      = 0;<br>w = 0;<br><br>#1 $display (&quot;Q:%b D:%b clk:%b&quot;, R, D, clk);<br>#5 $display (&quot;Q:%b D:%b
+      clk:%b&quot;, R, D, clk);<br>#5 $display (&quot;Q:%b D:%b clk:%b&quot;, R, D, clk);<br>#5 $display (&quot;Q:%b
+      D:%b clk:%b&quot;, R, D, clk);<br>#5 $display (&quot;Q:%b D:%b clk:%b&quot;, R, D, clk);<br>#5 $display
+      (&quot;Q:%b D:%b clk:%b&quot;, R, D, clk);<br>#5 $display (&quot;Q:%b D:%b clk:%b&quot;, R, D, clk);<br>#5
+      $display (&quot;Q:%b D:%b clk:%b&quot;, R, D, clk);<br>#5 $display (&quot;Q:%b D:%b clk:%b&quot;, R, D,
+      clk);<br>#5 $display (&quot;Q:%b D:%b clk:%b&quot;, R, D, clk);<br>#5 $display (&quot;Q:%b D:%b clk:%b&quot;, R,
+      D, clk);<br>#5 $display (&quot;Q:%b D:%b clk:%b&quot;, R, D, clk);<br>#5 $display (&quot;Q:%b D:%b clk:%b&quot;,
+      R, D, clk);<br>#5 $display (&quot;Q:%b D:%b clk:%b&quot;, R, D, clk);<br>#5 $display (&quot;Q:%b D:%b
+      clk:%b&quot;, R, D, clk);<br>#5 $display (&quot;Q:%b D:%b clk:%b&quot;, R, D, clk);<br>end<br><br>endmodule</p>
   </div>
 </div>
 
