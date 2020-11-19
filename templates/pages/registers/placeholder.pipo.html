@@ -1,0 +1,76 @@
+{% extends 'layouts/main.html' %}
+{% block title %}PIPO Register Code{% endblock %}
+{% block content %}
+
+<div class="page-header">
+  <h1>PIPO</h1>
+</div>
+
+<div class="row">
+  <div class="col-sm-6">
+    <h2>Module</h2>
+    
+<p>module PIPO_register(input_seq, output_seq,reset, clk,clear);</p>
+<p>&nbsp; parameter n=4;</p>
+<p>&nbsp; input [n-1:0] input_seq;</p>
+<p>&nbsp; input reset,clk,clear;</p>
+<p>&nbsp; output reg [n-1:0] output_seq;&nbsp;</p>
+<p>&nbsp;&nbsp;</p>
+<p>&nbsp; always @ (posedge clk)</p>
+<p>&nbsp; &nbsp; begin</p>
+<p>&nbsp; &nbsp; &nbsp; if (clear)</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; output_seq &lt;= 0;</p>
+<p>&nbsp; &nbsp; &nbsp; if(reset)</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; output_seq &lt;= input_seq;</p>
+<p>&nbsp; &nbsp; &nbsp; else</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; output_seq = {output_seq[n-2:0],1&apos;b0};</p>
+<p>&nbsp; &nbsp; end</p>
+<p>&nbsp;&nbsp;</p>
+<p>endmodule</p>
+  </div>
+  <div class="col-sm-6">
+    <h2>Test Bench</h2>
+    <p>module test;</p>
+<p><br></p>
+<p>&nbsp; reg [{{(result.bits | int)-1}}:0] input_seq;</p>
+<p>&nbsp; wire [{{(result.bits | int)-1}}:0] output_seq; // it must be wire for testbench</p>
+<p>&nbsp; reg reset;</p>
+<p>&nbsp; reg clk, clear;</p>
+<p><br></p>
+<p>&nbsp; PIPO_register pipo(input_seq, output_seq, reset, clk,clear);</p>
+<p>&nbsp;&nbsp;</p>
+<p>&nbsp; initial begin</p>
+<p>&nbsp; &nbsp; $dumpfile(&quot;dump.vcd&quot;);</p>
+<p>&nbsp; &nbsp; $dumpvars(1);</p>
+<p>&nbsp; &nbsp; clk = 0;</p>
+<p>&nbsp; &nbsp; clear = 0;</p>
+<p>&nbsp; &nbsp; #10 clear = 1;</p>
+<p>&nbsp; &nbsp; #10 clear = 0;</p>
+<p>&nbsp; &nbsp; #20 $display(&quot;output:%b&quot;, output_seq);</p>
+<p>&nbsp; &nbsp; #10 reset = 1; input_seq = 4&apos;b1011;</p>
+<p>&nbsp; &nbsp; #20 $display(&quot;output:%b&quot;, output_seq);</p>
+<p>&nbsp; &nbsp; #10 reset = 0;</p>
+<p>&nbsp; &nbsp; #20 $display(&quot;output:%b&quot;, output_seq);</p>
+<p>&nbsp; &nbsp; #20 $display(&quot;output:%b&quot;, output_seq);</p>
+<p>&nbsp; &nbsp; #20 $display(&quot;output:%b&quot;, output_seq);</p>
+<p>&nbsp; &nbsp; &nbsp;#20 $display(&quot;output:%b&quot;, output_seq);</p>
+<p>&nbsp; &nbsp; &nbsp;#20 $display(&quot;output:%b&quot;, output_seq);</p>
+<p>&nbsp; &nbsp; &nbsp;#20$display(&quot;output:%b&quot;, output_seq);</p>
+<p>&nbsp; &nbsp; &nbsp;#20 $display(&quot;output:%b&quot;, output_seq);</p>
+<p>&nbsp; &nbsp; #20 $display(&quot;output:%b&quot;, output_seq);</p>
+<p>&nbsp; &nbsp; #20 $display(&quot;output:%b&quot;, output_seq);</p>
+<p>&nbsp; &nbsp; &nbsp;#20 $display(&quot;output:%b&quot;, output_seq);</p>
+<p>&nbsp; &nbsp; &nbsp;#20 $display(&quot;output:%b&quot;, output_seq);</p>
+<p>&nbsp; &nbsp; &nbsp;#20 $display(&quot;output:%b&quot;, output_seq);</p>
+<p>&nbsp; end</p>
+<p>&nbsp; always #10 clk = ~clk;</p>
+<p><br></p>
+<p>endmodule</p>
+  </div>
+
+</div>
+
+
+
+
+{% endblock %}

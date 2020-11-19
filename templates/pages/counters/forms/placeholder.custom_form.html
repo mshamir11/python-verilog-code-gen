@@ -1,0 +1,31 @@
+{% extends 'layouts/main.html' %}
+{% block title %}Custom Counter Form{% endblock %}
+{% block content %}
+
+<div class="page-header">
+  <h1>Custom Counter</h1>
+</div>
+
+<form action="{{ url_for('custom_counter') }}" onsubmit="return validateForm()" method = "POST">
+  <label for="fname">No. of bits:</label><br>
+  <input type="text" id="bits" name="bits" value="" required><br>
+  <label for="lname">Starting Point:</label><br>
+  <input type="text" id="spoint" name="spoint" value="" required><br>
+  <label for="lname">Ending Point:</label><br>
+  <input type="text" id="epoint" name="epoint" value="" required><br><br>
+  
+  <!-- <label for="cars">Choose a type of implementation:</label>
+  <select name="implementation" id="implementation">
+    <option value="behavioral">Behavioral</option>
+    <option value="structural">Structural</option> 
+
+  </select><br>  -->
+<label for="CustomCounter__type">Choose a counter</label>
+<select name="CustomCounter__type" id="CustomCounter__type">
+  <option value="CustomCounter__up">Up Counter</option>
+  <option value="CustomCounter__down">Down Counter</option> 
+
+</select><br> 
+ <input type="submit" value="Submit"> 
+</form>
+{% endblock %}

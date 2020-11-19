@@ -1,5 +1,5 @@
 {% extends 'layouts/main.html' %}
-{% block title %}About{% endblock %}
+{% block title %}Modules{% endblock %}
 {% block content %}
 
 <div class="page-header">
@@ -14,11 +14,38 @@
     <h4><li><a href="{{ url_for('down_counter_form') }}">Down Counter</a></li></h4>
     <h4><li><a href="{{ url_for('johnson_counter_form') }}">Johnson Counter</a></li></h4>
     <h4><li><a href="{{ url_for('ring_counter_form') }}">Ring Counter</a></li></h4>
+    <h4><li><a href="{{ url_for('custom_counter_form') }}">Custom Counter</a></li></h4>
   </ul>
   <h3><li>Registers</li></h3>
+  <ul>
+    <h4><li><a href="{{ url_for('siso_form') }}">SISO</a></li></h4>
+    <h4><li><a href="{{ url_for('pipo_form') }}">PISO</a></li></h4>
+    <h4><li><a href="{{ url_for('pipo_form') }}">PIPO</a></li></h4>
+    <h4><li><a href="{{ url_for ('shift_register_form') }}">Shift Registers</a></li></h4>
+    <h4><li><a href="{{ url_for('circular_register_form') }}">Circular Registers</a></li></h4>
+  </ul>
   <h3><li>Flip Flops</li></h3>
+  <ul>
+    <h4><li><a href="{{ url_for('d_flipflop') }}">D Flip Flop</a></li></h4>
+    <h4><li><a href="{{ url_for('jk_flipflop') }}">JK Flip Flop</a></li></h4>
+    <h4><li><a href="{{ url_for('sr_flipflop') }}">SR Flip Flop</a></li></h4>
+    <h4><li><a href="{{ url_for('t_flipflop') }}">T Flip Flop</a></li></h4>
+  </ul>
   <h3><li>Floating Point Arithmetic Operation Units</li></h3>
-  <h3><li>FSM Sequence Detectors</li></h3>
+  <ul>
+    <h4><li><a href="{{ url_for('floating_adder_form') }}">Addition</a></li></h4>
+    <h4><li><a href="{{ url_for('floating_subtracter_form') }}">Subtraction</a></li></h4>
+    <h4><li><a href="{{ url_for('floating_multiplication_form') }}">Multiplication</a></li></h4>
+    <h4><li><a href="{{ url_for('floating_division_form') }}">Division</a></li></h4>
+  </ul>
+  <h3><li>FSM </li></h3>
+  <ul>
+    <h4><li><a href="{{url_for('fsm_moore_form')}}">Moore Implementation</a></li></h4>
+    <h4><li><a href="{{url_for('fsm_mealey_form')}}">Mealy Implementation</a></li></h4>
+    
+  
+  </ul>
+
   
   <!-- <li>Australia</li>
   <li>South Africa</li>

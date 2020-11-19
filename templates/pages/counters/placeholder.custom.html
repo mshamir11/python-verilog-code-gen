@@ -1,0 +1,76 @@
+{% extends 'layouts/main.html' %}
+{% block title %}Custom Counter Code{% endblock %}
+{% block content %}
+
+
+
+{% if result.CustomCounter__type=='CustomCounter__up' %}
+
+<div class="page-header">
+  <h1>Up Counter</h1>
+</div>
+
+<p>module counter(clk,reset,select,counter); &nbsp;</p>
+<p>&nbsp;&nbsp;</p>
+<p>&nbsp; parameter n = {{result.bits}};</p>
+<p>&nbsp; parameter start_point= {{result.spoint}};</p>
+<p>&nbsp; parameter end_point= {{result.epoint}};</p>
+<p>&nbsp; input clk;</p>
+<p>&nbsp; input reset;</p>
+<p>&nbsp; input[1:0] select;</p>
+<p>&nbsp;&nbsp;</p>
+<p>&nbsp; output reg[{{(result.bits | int)-1}}:0] counter;</p>
+<p>&nbsp;&nbsp;</p>
+<p>&nbsp;&nbsp;</p>
+<p>&nbsp;&nbsp;</p>
+<p>&nbsp; always @(posedge clk,reset)</p>
+<p>&nbsp; &nbsp; begin</p>
+<p>&nbsp; &nbsp; &nbsp; if (reset)</p>
+<p>&nbsp; &nbsp; <span style="white-space:pre;">&nbsp; &nbsp;&nbsp;</span>counter &lt;=start_point;&nbsp;</p>
+<p>&nbsp; &nbsp; &nbsp; else begin</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; if (counter==end_point)</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span style="white-space:pre;">&nbsp; &nbsp; &nbsp; &nbsp;&nbsp;</span>counter&lt;=start_point;</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; <span style="white-space:pre;">&nbsp; &nbsp; &nbsp; &nbsp;&nbsp;</span>else</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span style="white-space:pre;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;</span>counter =counter + 1;</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp;&nbsp;</p>
+<p>&nbsp; &nbsp; &nbsp; end</p>
+<p>&nbsp; &nbsp; end</p>
+<p>endmodule</p>
+
+
+{% elif result.CustomCounter__type=='CustomCounter__down' %}
+<div class="page-header">
+  <h1>Down Counter</h1>
+</div>
+<p>module counter(clk,reset,select,counter); &nbsp;</p>
+<p>&nbsp;&nbsp;</p>
+<p>&nbsp; parameter n = {{result.bits}};</p>
+<p>&nbsp; parameter start_point= {{result.spoint}};</p>
+<p>&nbsp; parameter end_point= {{result.epoint}} ;</p>
+<p>&nbsp; input clk;</p>
+<p>&nbsp; input reset;</p>
+<p>&nbsp; input[1:0] select;</p>
+<p>&nbsp;&nbsp;</p>
+<p>&nbsp; output reg[{{(result.bits | int)-1}}:0] counter;</p>
+<p>&nbsp;&nbsp;</p>
+<p>&nbsp;&nbsp;</p>
+<p>&nbsp;&nbsp;</p>
+<p>&nbsp; always @(posedge clk,reset)</p>
+<p>&nbsp; &nbsp; begin</p>
+<p>&nbsp; &nbsp; &nbsp; if (reset)</p>
+<p>&nbsp; &nbsp; <span style="white-space:pre;">&nbsp; &nbsp;&nbsp;</span>counter &lt;=start_point;&nbsp;</p>
+<p>&nbsp; &nbsp; &nbsp; else begin</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; if (counter==end_point)</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span style="white-space:pre;">&nbsp; &nbsp; &nbsp; &nbsp;&nbsp;</span>counter&lt;=start_point;</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; <span style="white-space:pre;">&nbsp; &nbsp; &nbsp; &nbsp;&nbsp;</span>else</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span style="white-space:pre;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;</span>counter =counter - 1;</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp;&nbsp;</p>
+<p>&nbsp; &nbsp; &nbsp; end</p>
+<p>&nbsp; &nbsp; end</p>
+<p>endmodule</p>
+
+{% endif %}
+
+
+
+{% endblock %}

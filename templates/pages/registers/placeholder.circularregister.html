@@ -1,0 +1,154 @@
+
+
+
+{% extends 'layouts/main.html' %}
+{% block title %}Circular Register Code{% endblock %}
+{% block content %}
+
+
+
+{% if result.CircularRegister___type=='CircularRegister___left' %}
+
+<div class="page-header">
+  <h1>Left Circular Register </h1>
+</div>
+
+<div class="row">
+  <div class="col-sm-6">
+    <h2>Module</h2>
+<p>module Circular_register(input_seq,clear,reset,clk,output_seq);</p>
+<p>&nbsp; parameter n = {{(result.bits | int)}};</p>
+<p>&nbsp; input [n-1:0] input_seq;</p>
+<p>&nbsp; input reset,clk,clear;</p>
+<p>&nbsp; output reg [n-1:0] output_seq;</p>
+<p>&nbsp;&nbsp;</p>
+<p>&nbsp; always @(posedge clk) begin</p>
+<p>&nbsp; &nbsp; if (clear)</p>
+<p>&nbsp; &nbsp; &nbsp; output_seq &lt;= 0;</p>
+<p>&nbsp; &nbsp; if (reset)</p>
+<p>&nbsp; &nbsp; &nbsp; output_seq &lt;= input_seq;</p>
+<p>&nbsp; <span style="white-space:pre;">&nbsp; &nbsp;&nbsp;</span>else begin</p>
+<p>&nbsp; &nbsp; &nbsp; output_seq &lt;= {output_seq[n-2:0],output_seq[n-1]}</p>
+<p>&nbsp; &nbsp; end</p>
+<p>&nbsp; end</p>
+<p>&nbsp;&nbsp;</p>
+<p>endmodule</p>
+</div>
+<div class="col-sm-6">
+  <h2>Test Bench</h2>
+  <p>module test;</p>
+<p><br></p>
+<p>&nbsp; reg [{{(result.bits | int)-1}}:0] input_seq;</p>
+<p>&nbsp; wire [{{(result.bits | int)-1}}:0] output_seq; // it must be wire for testbench</p>
+<p>&nbsp; reg reset;</p>
+<p>&nbsp; reg clk, clear;</p>
+<p><br></p>
+<p>&nbsp; Circular_register pipo(input_seq,clear,reset,clk,output_seq);</p>
+<p>&nbsp;&nbsp;</p>
+<p>&nbsp; initial begin</p>
+<p>&nbsp; &nbsp; $dumpfile(&quot;dump.vcd&quot;);</p>
+<p>&nbsp; &nbsp; $dumpvars(1);</p>
+<p>&nbsp; &nbsp; clk = 0;</p>
+<p>&nbsp; &nbsp; clear = 0;</p>
+<p>&nbsp; &nbsp; #10 clear = 1;</p>
+<p>&nbsp; &nbsp; #10 clear = 0;</p>
+<p>&nbsp; &nbsp; #20 $display(&quot;output:%b&quot;, output_seq);</p>
+<p>&nbsp; &nbsp; #10 reset = 1; input_seq = 4&apos;b1011;</p>
+<p>&nbsp; &nbsp; #20 $display(&quot;output:%b&quot;, output_seq);</p>
+<p>&nbsp; &nbsp; #10 reset = 0;</p>
+<p>&nbsp; &nbsp; #20 $display(&quot;output:%b&quot;, output_seq);</p>
+<p>&nbsp; &nbsp; #20 $display(&quot;output:%b&quot;, output_seq);</p>
+<p>&nbsp; &nbsp; #20 $display(&quot;output:%b&quot;, output_seq);</p>
+<p>&nbsp; &nbsp; &nbsp;#20 $display(&quot;output:%b&quot;, output_seq);</p>
+<p>&nbsp; &nbsp; &nbsp;#20 $display(&quot;output:%b&quot;, output_seq);</p>
+<p>&nbsp; &nbsp; &nbsp;#20$display(&quot;output:%b&quot;, output_seq);</p>
+<p>&nbsp; &nbsp; &nbsp;#20 $display(&quot;output:%b&quot;, output_seq);</p>
+<p>&nbsp; &nbsp; #20 $display(&quot;output:%b&quot;, output_seq);</p>
+<p>&nbsp; &nbsp; #20 $display(&quot;output:%b&quot;, output_seq);</p>
+<p>&nbsp; &nbsp; &nbsp;#20 $display(&quot;output:%b&quot;, output_seq);</p>
+<p>&nbsp; &nbsp; &nbsp;#20 $display(&quot;output:%b&quot;, output_seq);</p>
+<p>&nbsp; &nbsp; &nbsp;#20 $display(&quot;output:%b&quot;, output_seq);</p>
+<p>&nbsp; end</p>
+<p>&nbsp; always #10 clk = ~clk;</p>
+<p><br></p>
+<p>endmodule</p>
+
+</div>
+</div>
+
+<hr>
+
+
+{% elif result.CircularRegister___type=='CircularRegister___right' %}
+
+<div class="page-header">
+  <h1>Right Circular Register </h1>
+</div>
+<div class="row">
+  <div class="col-sm-6">
+  <h2>Module</h2>
+<p>module Circular_register(input_seq,clear,reset,clk,output_seq);</p>
+<p>&nbsp; parameter n = {{(result.bits | int)}};</p>
+<p>&nbsp; input [n-1:0] input_seq;</p>
+<p>&nbsp; input reset,clk,clear;</p>
+<p>&nbsp; output reg [n-1:0] output_seq;</p>
+<p>&nbsp;&nbsp;</p>
+<p>&nbsp; always @(posedge clk) begin</p>
+<p>&nbsp; &nbsp; if (clear)</p>
+<p>&nbsp; &nbsp; &nbsp; output_seq &lt;= 0;</p>
+<p>&nbsp; &nbsp; if (reset)</p>
+<p>&nbsp; &nbsp; &nbsp; output_seq &lt;= input_seq;</p>
+<p>&nbsp; <span style="white-space:pre;">&nbsp; &nbsp;&nbsp;</span>else begin</p>
+<p>&nbsp; &nbsp; &nbsp; output_seq &lt;= {output_seq[0],output_seq[1:n-1]}</p>
+<p>&nbsp; &nbsp; end</p>
+<p>&nbsp; end</p>
+<p>&nbsp;&nbsp;</p>
+<p>endmodule</p>
+
+</div>
+<div class="col-sm-6">
+  <h2>Test Bench</h2>
+  <p>module test;</p>
+<p><br></p>
+<p>&nbsp; reg [{{(result.bits | int)-1}}:0] input_seq;</p>
+<p>&nbsp; wire [{{(result.bits | int)-1}}:0] output_seq; // it must be wire for testbench</p>
+<p>&nbsp; reg reset;</p>
+<p>&nbsp; reg clk, clear;</p>
+<p><br></p>
+<p>&nbsp; Circular_register pipo(input_seq,clear,reset,clk,output_seq);</p>
+<p>&nbsp;&nbsp;</p>
+<p>&nbsp; initial begin</p>
+<p>&nbsp; &nbsp; $dumpfile(&quot;dump.vcd&quot;);</p>
+<p>&nbsp; &nbsp; $dumpvars(1);</p>
+<p>&nbsp; &nbsp; clk = 0;</p>
+<p>&nbsp; &nbsp; clear = 0;</p>
+<p>&nbsp; &nbsp; #10 clear = 1;</p>
+<p>&nbsp; &nbsp; #10 clear = 0;</p>
+<p>&nbsp; &nbsp; #20 $display(&quot;output:%b&quot;, output_seq);</p>
+<p>&nbsp; &nbsp; #10 reset = 1; input_seq = 4&apos;b1011;</p>
+<p>&nbsp; &nbsp; #20 $display(&quot;output:%b&quot;, output_seq);</p>
+<p>&nbsp; &nbsp; #10 reset = 0;</p>
+<p>&nbsp; &nbsp; #20 $display(&quot;output:%b&quot;, output_seq);</p>
+<p>&nbsp; &nbsp; #20 $display(&quot;output:%b&quot;, output_seq);</p>
+<p>&nbsp; &nbsp; #20 $display(&quot;output:%b&quot;, output_seq);</p>
+<p>&nbsp; &nbsp; &nbsp;#20 $display(&quot;output:%b&quot;, output_seq);</p>
+<p>&nbsp; &nbsp; &nbsp;#20 $display(&quot;output:%b&quot;, output_seq);</p>
+<p>&nbsp; &nbsp; &nbsp;#20$display(&quot;output:%b&quot;, output_seq);</p>
+<p>&nbsp; &nbsp; &nbsp;#20 $display(&quot;output:%b&quot;, output_seq);</p>
+<p>&nbsp; &nbsp; #20 $display(&quot;output:%b&quot;, output_seq);</p>
+<p>&nbsp; &nbsp; #20 $display(&quot;output:%b&quot;, output_seq);</p>
+<p>&nbsp; &nbsp; &nbsp;#20 $display(&quot;output:%b&quot;, output_seq);</p>
+<p>&nbsp; &nbsp; &nbsp;#20 $display(&quot;output:%b&quot;, output_seq);</p>
+<p>&nbsp; &nbsp; &nbsp;#20 $display(&quot;output:%b&quot;, output_seq);</p>
+<p>&nbsp; end</p>
+<p>&nbsp; always #10 clk = ~clk;</p>
+<p><br></p>
+<p>endmodule</p>
+
+</div>
+</div>
+{% endif %}
+
+
+
+{% endblock %}

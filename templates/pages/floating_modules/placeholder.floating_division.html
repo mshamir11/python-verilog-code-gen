@@ -1,0 +1,102 @@
+{% extends 'layouts/main.html' %}
+{% block title %}Floating Division Code{% endblock %}
+{% block content %}
+
+<div class="page-header">
+  <h1>Floating Division</h1>
+</div>
+
+
+
+<div class="row">
+  <div class="col-sm-6">
+    <h2>Module</h2>
+    <p><br></p>
+<p>module floating_divider(a,b,c);</p>
+<p>&nbsp; input [31:0] a;</p>
+<p>&nbsp; input [31:0] b;</p>
+<p>&nbsp; output [31:0] c;</p>
+<p>&nbsp; wire S1,S2,S_result;</p>
+<p>&nbsp; reg[23:0] mantissa1,mantissa2;</p>
+<p>&nbsp; reg [23:0]result_mantissa;</p>
+<p>&nbsp; reg[7:0] exponent1;</p>
+<p>&nbsp; reg[7:0] exponent2;</p>
+<p>&nbsp; reg[7:0] result_exponent;</p>
+<p>&nbsp; reg [23:0] temp, remainder;</p>
+<p>&nbsp; int counter=0;</p>
+<p>&nbsp; int i=23;</p>
+<p>&nbsp;&nbsp;</p>
+<p>&nbsp; assign S1 = a[31];</p>
+<p>&nbsp; assign S2 = b[31];</p>
+<p>&nbsp; assign S_result = S1^S2;</p>
+<p>&nbsp; assign mantissa1 = {1&apos;b1,a[22:0]};</p>
+<p>&nbsp; assign mantissa2 = {1&apos;b1,b[22:0]};</p>
+<p>&nbsp; assign exponent1 = a[30:23];</p>
+<p>&nbsp; assign exponent2 = b[30:23];</p>
+<p>&nbsp; assign result_exponent = exponent1-exponent2+127;</p>
+<p>&nbsp; &nbsp;&nbsp;</p>
+<p>&nbsp; always@(a) begin</p>
+<p>&nbsp; &nbsp; result_mantissa = mantissa1/mantissa2;</p>
+<p>&nbsp; &nbsp; while(result_mantissa[i]!=1&apos;b1) begin</p>
+<p>&nbsp; &nbsp; &nbsp; i = i-1;</p>
+<p>&nbsp; &nbsp; &nbsp; counter = counter+1;</p>
+<p>&nbsp; &nbsp; end</p>
+<p>&nbsp; &nbsp;&nbsp;</p>
+<p>&nbsp; &nbsp; temp = mantissa1/mantissa2;</p>
+<p>&nbsp; &nbsp; remainder = mantissa1 - temp*mantissa2;</p>
+<p>&nbsp; &nbsp;&nbsp;</p>
+<p>&nbsp; &nbsp; for (int j=0; j&lt;=counter; j=j+1) begin</p>
+<p>&nbsp; &nbsp; &nbsp; if (remainder&gt;0) begin</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; remainder = remainder*2;</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; temp = remainder/mantissa2;</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; if (temp&gt;0) begin</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; result_mantissa = {result_mantissa[22:0],1&apos;b1};</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; remainder = remainder - temp*mantissa2;</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; end</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; else&nbsp;</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; result_mantissa = {result_mantissa[22:0],1&apos;b0};</p>
+<p>&nbsp; &nbsp; &nbsp; end</p>
+<p>&nbsp; &nbsp; &nbsp; else&nbsp;</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; break;</p>
+<p>&nbsp; &nbsp; end</p>
+<p>&nbsp; &nbsp;&nbsp;</p>
+<p>&nbsp; &nbsp; while(result_mantissa[23]!=1&apos;b1) begin</p>
+<p>&nbsp; &nbsp; &nbsp; result_mantissa = {result_mantissa[22:0],1&apos;b0};</p>
+<p>&nbsp; &nbsp; end</p>
+<p>&nbsp; end</p>
+<p><br></p>
+<p>&nbsp; assign c = {S_result,result_exponent,result_mantissa[22:0]};</p>
+<p>&nbsp;&nbsp;</p>
+<p>endmodule</p>
+
+  </div>
+
+  <div class="col-sm-6">
+    <h2>Test Bench</h2>
+    <p><br></p>
+<p>module testbench;</p>
+<p>&nbsp; reg [31:0] a;</p>
+<p>&nbsp; reg [31:0] b;</p>
+<p>&nbsp; wire [31:0] c;</p>
+<p>&nbsp; floating_dividor ins(a,b,c);</p>
+<p>&nbsp;&nbsp;</p>
+<p>&nbsp; initial</p>
+<p>&nbsp; &nbsp; begin</p>
+<p>&nbsp; &nbsp; &nbsp; $dumpfile(&quot;dump.vcd&quot;);</p>
+<p>&nbsp; &nbsp; &nbsp; $dumpvars(0);</p>
+<p><span style="white-space:pre;">&nbsp; &nbsp;&nbsp;</span>&nbsp; a = {{result.a}};</p>
+<p>&nbsp; &nbsp; &nbsp; b ={{result.b}};</p>
+<p>&nbsp; &nbsp; &nbsp; #5 $display(&quot;THis is testbench:A%b B:%b C:%b&quot;,a,b,c);</p>
+<p>&nbsp; &nbsp; &nbsp;&nbsp;</p>
+<p>&nbsp; &nbsp; &nbsp;&nbsp;</p>
+<p>&nbsp; &nbsp; end</p>
+<p>&nbsp;&nbsp;</p>
+<p>&nbsp;&nbsp;</p>
+<p>endmodule</p>
+<p><br></p>
+  </div>
+  
+</div> 
+
+
+{% endblock %}

@@ -1,12 +1,15 @@
 {% extends 'layouts/main.html' %}
-{% block title %}About{% endblock %}
+{% block title %}Johnson Counter Code{% endblock %}
 {% block content %}
 
 <div class="page-header">
   <h1>Johnson Counter</h1>
 </div>
 
-<p>module Dff(reset,clk,D,q,qnot);</p>
+<div class="row">
+  <div class="col-sm-6">
+    <h2>Module</h2>
+    <p>module Dff(reset,clk,D,q,qnot);</p>
 <p>&nbsp; input reset,clk,D;</p>
 <p>&nbsp; output reg q;</p>
 <p>&nbsp; output qnot;</p>
@@ -39,9 +42,35 @@
 <p>&nbsp; Dff a{{(result.bits | int)}} (reset,clk,Qbar[0],Q[{{(result.bits | int)-1}}],Qbar[{{(result.bits | int)-1}}]);</p>
 
 <p>endmodule</p>
+  </div>
+  <div class="col-sm-6">
+    <h2>Test Bench</h2>
+    <p>module johnsoncounter_tb;</p>
+<p>&nbsp; reg clk,reset;</p>
+<p>&nbsp; wire [{{(result.bits | int)-1}}:0] Q, Qbar;</p>
+<p>&nbsp;&nbsp;</p>
+<p>&nbsp; johnsoncounter Instance (Q, Qbar, clk,reset);</p>
+<p>&nbsp;&nbsp;</p>
+<p>&nbsp; initial begin</p>
+<p>&nbsp; &nbsp;&nbsp;</p>
+<p>&nbsp; &nbsp; clk = 0;</p>
+<p>&nbsp; &nbsp; reset = 1;&nbsp;</p>
+<p>&nbsp; &nbsp; #25;</p>
+<p>&nbsp; &nbsp; reset = 0;</p>
+<p>&nbsp; &nbsp; #400;</p>
+<p>&nbsp; &nbsp; $finish;</p>
+<p>&nbsp; end</p>
+<p>&nbsp; always #5 clk = ~clk;</p>
+<p>&nbsp;&nbsp;</p>
+<p>&nbsp; initial begin&nbsp;</p>
+<p>&nbsp; &nbsp; $dumpfile(&quot;dump.vcd&quot;);</p>
+<p>&nbsp; &nbsp; $dumpvars(1);</p>
+<p>&nbsp; end</p>
+<p><br></p>
+<p>endmodule</p>
+  </div>
 
-
-
+</div>
 <!-- <p>&nbsp; wire b;</p>
 <p>&nbsp; assign b = a&amp;Q[1];</p>
 <p>&nbsp; JKff a3 (reset,clk,b,b,Q[2],Qbar[2]);</p>
