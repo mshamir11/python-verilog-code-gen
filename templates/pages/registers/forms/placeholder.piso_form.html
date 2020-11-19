@@ -1,12 +1,12 @@
 {% extends 'layouts/main.html' %}
-{% block title %}PIPO Register Form{% endblock %}
+{% block title %}PISO Register Form{% endblock %}
 {% block content %}
 
 <div class="page-header">
-  <h1>PIPO</h1>
+  <h1>PISO</h1>
 </div>
 
-<form action="{{ url_for('pipo') }}" method = "POST">
+<form action="{{ url_for('piso') }}" method = "POST">
   <label for="fname">No. of bits:</label><br>
   <input type="text" id="bits" name="bits" value="" required><br>
   <!-- <label for="lname">Starting Point:</label><br>

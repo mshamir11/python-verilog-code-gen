@@ -1,0 +1,36 @@
+{% extends 'layouts/main.html' %}
+{% block title %}PISO Register Code{% endblock %}
+{% block content %}
+
+<div class="page-header">
+  <h1>PISO</h1>
+</div>
+
+<div class="row">
+    <h2>Module</h2>
+    <p>module PISO_register(input_seq,clk,reset,output_seq);</p>
+    <p>&nbsp; parameter n={{result.bits}};</p>
+    <p>&nbsp; input clk,reset;</p>
+    <p>&nbsp; input [n-1:0] input_seq;</p>
+    <p>&nbsp; output [n-1:0] output_seq;</p>
+    <p>&nbsp; wire [n-1:0] output_seq;</p>
+    <p>&nbsp; reg [n-1:0]temp;</p>
+    <p>&nbsp;&nbsp;</p>
+    <p>&nbsp; always@(posedge clk,posedge reset)</p>
+    <p>&nbsp; &nbsp; begin</p>
+    <p>&nbsp; &nbsp; &nbsp; if(reset==1&apos;b1)</p>
+    <p>&nbsp; &nbsp; &nbsp; &nbsp; temp &lt;= {{result.bits}}&apos;b{% for i in range(result.bits | int) %}0{% endfor %};</p>
+    <p>&nbsp; &nbsp; &nbsp; else</p>
+    <p>&nbsp; &nbsp; &nbsp; &nbsp; begin</p>
+    <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; temp &lt;= temp&lt;&lt;1&apos;b1;</p>
+    <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; temp[0] &lt;= input_seq;</p>
+    <p>&nbsp; &nbsp; &nbsp; &nbsp; end</p>
+    <p>&nbsp; &nbsp; end</p>
+    <p>&nbsp; assign output_seq = temp;</p>
+    <p>endmodule</p>
+</div>
+
+
+
+
+{% endblock %}

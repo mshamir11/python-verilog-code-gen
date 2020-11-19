@@ -195,6 +195,10 @@ def siso_form():
 def pipo_form():
     return render_template('pages/registers/forms/placeholder.pipo_form.html')
 
+@app.route('/piso-form')
+def piso_form():
+    return render_template('pages/registers/forms/placeholder.piso_form.html')
+
 @app.route('/shiftregister-form')
 def shift_register_form():
     return render_template('pages/registers/forms/placeholder.shiftregisters_form.html')
@@ -214,6 +218,11 @@ def siso():
 def pipo():   
     result = request.form
     return render_template('pages/registers/placeholder.pipo.html',result=result)
+
+@app.route('/piso',methods=['POST','GET'])
+def piso():   
+    result = request.form
+    return render_template('pages/registers/placeholder.piso.html',result=result)
 
 @app.route('/shiftregister',methods=['POST','GET'])
 def shiftregister():   
