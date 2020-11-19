@@ -50,7 +50,7 @@
 <p>&nbsp; &nbsp; reset = 0;</p>
 <p>&nbsp; &nbsp; #10 reset = 1;</p>
 <p>&nbsp; &nbsp;&nbsp;</p>
-<p>&nbsp; &nbsp; #10 reset = 0;input_seq = 4&apos;b1011;</p>
+<p>&nbsp; &nbsp; #10 reset = 0;input_seq = {{result.bits}}&apos;b{% for i in range(result.bits | int) %}1{% endfor %};</p>
 <p>&nbsp; &nbsp;&nbsp;</p>
 <p>&nbsp; &nbsp; #20 $display(&quot;output:%b&quot;, output_seq);</p>
 <p>&nbsp; &nbsp;&nbsp;</p>
