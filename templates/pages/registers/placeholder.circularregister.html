@@ -28,7 +28,7 @@
 <p>&nbsp; &nbsp; if (reset)</p>
 <p>&nbsp; &nbsp; &nbsp; output_seq &lt;= input_seq;</p>
 <p>&nbsp; <span style="white-space:pre;">&nbsp; &nbsp;&nbsp;</span>else begin</p>
-<p>&nbsp; &nbsp; &nbsp; output_seq &lt;= {output_seq[n-2:0],output_seq[n-1]}</p>
+<p>&nbsp; &nbsp; &nbsp; output_seq &lt;= {output_seq[n-2:0],output_seq[n-1]};</p>
 <p>&nbsp; &nbsp; end</p>
 <p>&nbsp; end</p>
 <p>&nbsp;&nbsp;</p>
@@ -99,7 +99,7 @@
 <p>&nbsp; &nbsp; if (reset)</p>
 <p>&nbsp; &nbsp; &nbsp; output_seq &lt;= input_seq;</p>
 <p>&nbsp; <span style="white-space:pre;">&nbsp; &nbsp;&nbsp;</span>else begin</p>
-<p>&nbsp; &nbsp; &nbsp; output_seq &lt;= {output_seq[0],output_seq[1:n-1]}</p>
+<p>&nbsp; &nbsp; &nbsp; output_seq &lt;= {output_seq[0],output_seq[n-1:1]};</p>
 <p>&nbsp; &nbsp; end</p>
 <p>&nbsp; end</p>
 <p>&nbsp;&nbsp;</p>
