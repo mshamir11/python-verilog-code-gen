@@ -13,14 +13,14 @@
   <div class="col-sm-6">
 
     <h2>Module</h2>
-    <p>module upcounter(clk,reset,select,counter); &nbsp;</p>
+    <p>module upcounter(clk,reset,counter); &nbsp;</p>
 <p>&nbsp;&nbsp;</p>
 <p>&nbsp; parameter n = {{result.bits}};</p>
 <p>&nbsp; parameter start_point= 0;</p>
 <p>&nbsp; parameter end_point= {{2**(result.bits | int)-1}};</p>
 <p>&nbsp; input clk;</p>
 <p>&nbsp; input reset;</p>
-<p>&nbsp; input[1:0] select;</p>
+
 <p>&nbsp;&nbsp;</p>
 <p>&nbsp; output reg[{{(result.bits | int)-1}}:0] counter;</p>
 <p>&nbsp;&nbsp;</p>
@@ -46,7 +46,10 @@
   <div class="col-sm-6">
 
     <h2>Test Bench</h2>
-    <p>module upcounter_tb;<br>reg clk,reset;<br>wire [{{(result.bits | int)-1}}:0] Q;<br><br>upcounter Instance (Q, clk,reset);<br><br>initial begin<br><br>clk = 0;<br>reset = 1;<br>#25;<br>reset = 0;<br>#400;<br>$finish;<br>end<br>always #5 clk = ~clk;<br><br>initial begin<br>$dumpfile(&quot;dump.vcd&quot;);<br>$dumpvars(1);<br>end<br><br>endmodule</p>
+    <p>module upcounter_tb;<br>reg clk,reset;
+      <br>wire [{{(result.bits | int)-1}}:0] counter;<br>
+    upcounter Instance (clk,reset,counter);<br><br>initial begin<br><br>clk = 0;<br>reset = 1;<br>#25;<br>reset = 0;<br>#400;<br>$finish;<br>end<br>always begin<br>#5 clk = ~clk;<br>#5 $display(&quot;display:%b&quot;,counter);<br>end<br><br>initial begin<br>$dumpfile(&quot;dump.vcd&quot;);<br>$dumpvars(1);<br>end<br><br>endmodule
+     </p>
     
     
   </div>
