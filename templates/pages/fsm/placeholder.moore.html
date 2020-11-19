@@ -1,5 +1,5 @@
 {% extends 'layouts/main.html' %}
-{% block title %}FSM Moore Implementation{% endblock %}
+{% block title %}Moore FSM Implementation{% endblock %}
 {% block content %}
 
 <div class="page-header">
@@ -10,15 +10,26 @@
     <h2>Module</h2>
 <p>module moore(clk,rst,w,z);
   <br>input clk,rst,w;<br>output z;
+  {% if count-1 >0 %}
   <br>reg [{{count-1}}:0] y,Y;
+
   <br>parameter [{{count-1}}:0] 
-  
   {% set counter =namespace(value=0) %}
   {% for item in result.present[:-1] %}
   {{item}}={{counter.value}} ,
   {% set counter.value=counter.value + 1 %}
   {% endfor %}
   {{result.present[-1] }}={{counter.value}};<br>
+  {% else %}
+  <br>reg  y,Y;
+  <br>parameter
+  {% set counter =namespace(value=0) %}
+  {% for item in result.present[:-1] %}
+  {{item}}={{counter.value}} ,
+  {% set counter.value=counter.value + 1 %}
+  {% endfor %}
+  {{result.present[-1] }}={{counter.value}};<br>
+  {% endif %}
   
   <br>always @(w,y)<br>
   case(y)<br>

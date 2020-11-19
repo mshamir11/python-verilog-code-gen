@@ -1,9 +1,9 @@
 {% extends 'layouts/main.html' %}
-{% block title %}FSM Moore Form{% endblock %}
+{% block title %}Moore Implementation Form{% endblock %}
 {% block content %}
 
 <div class="page-header">
-  <h1>FSM : State table to verilog code</h1>
+  <h1>State table to verilog code : Moore Implementation</h1>
 </div>
 
 <div>
@@ -45,6 +45,14 @@
 </table>
 <button type="submit" class="btn btn-primary">Submit</button>
 </form>
+<hr>
+<p><h4>Instructions:</h4></p>
+<p>1. The current state and next state should be alphabets.</p>
+<p>2. The output cell should be either 0 or 1.</p>
+<p>3. An example of expected input.
+
+  <img src= "static/images/moore.png"> 
+</p>
 <!-- <table class="table table-bordered">
   <tr>
     <thead>

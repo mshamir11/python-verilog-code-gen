@@ -9,5 +9,3 @@ This project aims to create a program that can generate Verilog code for some se
 
 
 
-
-
