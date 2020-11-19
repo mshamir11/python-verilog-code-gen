@@ -32,6 +32,7 @@
   {% endif %}
   
   <br>always @(w,y)<br>
+  begin<br>
   case(y)<br>
   {% set counter =namespace(value=0) %}
   {% for item in result.present %}
@@ -41,12 +42,20 @@
   
   
   {% endfor %}
+
+{% if count-1>0 %}
 <br>default:
-  Y={{count-1}}&apos;b{% for i in range(count-1)%}x{% endfor %};<br>endcase<br>
+  Y={{count-1}}&apos;b{% for i in range(count-1)%}x{% endfor %};
+
+{% endif %}
   
-  <br>always @(negedge rst, posedge clk)<br>if
+  <br>endcase<br>
+  end<br>
+  <br>always @(negedge rst, posedge clk)<br>
+  begin<br>
+  if
   (rst==0)<br>y&lt;=A;<br>else<br>y&lt;=Y;<br>
-  
+  end<br>
   
   {% set counter =namespace(value=0) %}
   {% set myList =[] %}
@@ -59,6 +68,8 @@
 {% set counter.value=counter.value + 1 %}
 {% endif %}
 {% endfor %}
+
+{% if (myList|length -1 )>0 %}
 <br>assign z=
   {% for i in range (myList|length -1)%}
 
@@ -66,6 +77,11 @@
   
   {% endfor %}
   (y=={{myList[-1][1]}});
+
+{% else %}
+<br>assign z= (y=={{myList[-1][1]}});
+{% endif %}
+
   
   <br>endmodule</p>
 
