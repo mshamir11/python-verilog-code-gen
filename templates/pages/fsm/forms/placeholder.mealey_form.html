@@ -1,9 +1,9 @@
 {% extends 'layouts/main.html' %}
-{% block title %}Custom Counter Form{% endblock %}
+{% block title %}Mealy FSM Form{% endblock %}
 {% block content %}
 
 <div class="page-header">
-  <h1>FSM : State table to verilog code</h1>
+  <h1> State table to verilog code : Mealy Implementation</h1>
 </div>
 
 <div>
@@ -32,11 +32,21 @@
     <td colspan="1">w=1</td>
   
   </tr>
-  <tr><td><input type="text" name="present" required /></td><td> <input type="text" name="next_0" required /></td><td><input type="text" name="next_1" required/></td><td><input type="text" name="output_0" required/></td><td><input type="text" name="output_1" required/></td><td></tr>
+  <tr><td><input type="text" name="present" required /></td><td> <input type="text" name="next_state_0" required /></td><td><input type="text" name="next_state_1" required/></td><td><input type="text" name="output_0" required/></td><td><input type="text" name="output_1" required/></td><td></tr>
 </thead>
 </table>
 <button type="submit" class="btn btn-primary">Submit</button>
 </form>
+
+<hr>
+<p><h4>Instructions:</h4></p>
+<p>1. The current state and next state should be alphabets.</p>
+<p>2. The output cell should be either 0 or 1.</p>
+<p>3. An example of expected input.
+
+  <img src= "static/images/mealy.png"> 
+</p>
+<p><br></p>
 <!-- <table class="table table-bordered">
   <tr>
     <thead>
@@ -66,7 +76,7 @@
   var count =0;
   function add() {
   count++;
-  $("table").append("<tr><td><input type=\"text\" name=\"present\" required /></td><td> <input type=\"text\" name=\"next_0\" required /></td><td><input type=\"text\" name=\"next_1\" required/></td><td><input type=\"text\" name=\"output_0\" required/></td><td><input type=\"text\" name=\"output_1\" required/></td><td><button onclick='rm()'>remove</button></td></tr>");
+  $("table").append("<tr><td><input type=\"text\" name=\"present\" required /></td><td> <input type=\"text\" name=\"next_state_0\" required /></td><td><input type=\"text\" name=\"next_state_1\" required/></td><td><input type=\"text\" name=\"output_0\" required/></td><td><input type=\"text\" name=\"output_1\" required/></td><td><button onclick='rm()'>remove</button></td></tr>");
 }
 function rm() {
   $(event.target).closest("tr").remove();

@@ -360,8 +360,13 @@ def fsm_mealey_form():
 def fsm_mealey():   
     result = request.form
     result_dic =result.to_dict(flat=False)
-    print(result_dic)
-    return render_template('pages/fsm/placeholder.mealey.html',result=result_dic)
+    log_count = math.log2(len(result_dic['present']))
+    if log_count != int(log_count):
+        log_count=int(log_count)+1
+    else:
+        log_count = int(log_count)
+    print(log_count)
+    return render_template('pages/fsm/placeholder.mealey.html',result=result_dic,count=log_count)
 #----------------------------------------------------------------------------#
 # Launch.
 #----------------------------------------------------------------------------#
