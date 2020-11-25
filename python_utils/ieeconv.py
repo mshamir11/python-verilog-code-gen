@@ -68,6 +68,9 @@ def floatingPoint(real_no):
     # Also converting it to bias  
     # exp by adding 127. 
     exp_str = bin((len(int_str) - ind - 1) + 127)[2 : ] 
+
+    while (len(exp_str)<8):
+      exp_str = '0'+exp_str
   
     # getting mantissa string 
     # By adding int_str and fraction_str. 
@@ -80,8 +83,8 @@ def floatingPoint(real_no):
     # mantissa string so as to make 
     # it's length of 23 bits. 
     mant_str = mant_str + ('0' * (23 - len(mant_str))) 
-  
+
     # Returning the sign, Exp 
     # and Mantissa Bit strings. 
-    return sign_bit, exp_str, mant_str 
+    return sign_bit, exp_str, mant_str[0:23] 
   
