@@ -11,7 +11,7 @@
 <div class="row">
   <div class="col-sm-6">
     <h2>Module</h2>
-    <p>module multiplier(a,b,c);<br><br>input [31:0] a;<br>input [31:0] b;<br>output [32:0] c;<br>wire
+    <p>module multiplier(a,b,c);<br><br>input [31:0] a;<br>input [31:0] b;<br>output [31:0] c;<br>wire
       S1,S2,S_result;<br>reg[23:0]mantissa1,mantissa2;<br>reg [47:0]result_mantissa;<br>reg temp_exp;<br>reg[7:0]
       exponent1;<br>reg[7:0] exponent2;<br>reg[7:0] result_exponent;<br><br><br>assign S1 = a[31];<br>assign S2 =
       b[31];<br>xor(S_result,S1,S2);<br>assign mantissa1 = {1&apos;b1,a[22:0]};<br>assign mantissa2 =
@@ -20,14 +20,14 @@
       mantissa1*mantissa2;<br>if (result_mantissa[47]==0) begin<br>temp_exp = 1&apos;b0;<br>end<br><br>else
       begin<br>temp_exp = 1&apos;b1;<br>result_mantissa = result_mantissa&gt;&gt;1;<br>end<br>end<br><br>// Dealing with
       the exponents<br>assign result_exponent = exponent1+exponent2-127+temp_exp;<br><br><br><br>// Final
-      Result<br>assign c= {S_result,result_exponent,result_mantissa[45:22]};<br>endmodule</p>
+      Result<br>assign c= {S_result,result_exponent,result_mantissa[45:23]};<br>endmodule</p>
 
 
   </div>
 
   <div class="col-sm-6">
     <h2>Test Bench</h2>
-    <p>module testbench;<br />&nbsp; reg [31:0] a;<br />&nbsp; reg [31:0] b;<br />&nbsp; wire [32:0] c;<br />&nbsp;
+    <p>module testbench;<br />&nbsp; reg [31:0] a;<br />&nbsp; reg [31:0] b;<br />&nbsp; wire [31:0] c;<br />&nbsp;
       multiplier ins(a,b,c);<br />&nbsp; <br />&nbsp; initial<br />&nbsp;&nbsp;&nbsp;
       begin<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; $dumpfile("dump.vcd");<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       $dumpvars(0);<br /><br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; a =
